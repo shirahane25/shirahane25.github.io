@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-10-15 19:57:23" itemprop="dateModified" datetime="2025-10-15T19:57:23+08:00">2025-10-15</time>
+                <time title="Modified: 2025-10-15 21:36:00" itemprop="dateModified" datetime="2025-10-15T21:36:00+08:00">2025-10-15</time>
               </span>
 
           
@@ -568,6 +568,59 @@ f_{u, 1} = s + \deg_u - 4
 class="math inline">\(f_{u, 0}\)</span> and <span
 class="math inline">\(f_{u, 1}\)</span>.</p>
 <p>Overall complexity: <span
+class="math inline">\(\Theta(n)\)</span>.</p>
+<h2 id="cf2062e1"><a
+target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2062/E1">CF2062E1</a></h2>
+<blockquote>
+<p>Given a tree consisting of <span class="math inline">\(n\)</span>
+nodes, rooted at <span class="math inline">\(1\)</span>, where each
+nodes <span class="math inline">\(i\)</span> has a weight <span
+class="math inline">\(w_i\)</span>.</p>
+<p>Alice and Bob are playing a game on the tree alternately, with Alice
+going first.</p>
+<p>In each turn, the current player must perform the following
+operation:</p>
+<ul>
+<li><p>Let <span class="math inline">\(j\)</span> denote the node the
+opponent chose in the last turn.</p></li>
+<li><p>Choose a node <span class="math inline">\(i\)</span> such that
+<span class="math inline">\(w_i &gt; w_j\)</span>, and delete the
+subtree of node <span class="math inline">\(i\)</span>. In particular,
+Alice can choose an arbitrary node <span
+class="math inline">\(i\)</span> in the first turn.</p></li>
+</ul>
+<p>The player who <strong>cannot</strong> make a move wins. Find one of
+the possible nodes Alice may choose in the first turn so that she can
+win if both of the players play optimally.</p>
+</blockquote>
+<p><strong>Claim.</strong> Alice should choose node <span
+class="math inline">\(i\)</span> with the maximum <span
+class="math inline">\(w_i\)</span> such that there exists a <span
+class="math inline">\(j\)</span> with <span class="math inline">\(w_j
+&gt; w_i\)</span> and <span class="math inline">\(j\)</span> is not in
+the subtree of <span class="math inline">\(i\)</span>.</p>
+<p><strong>Proof.</strong> Assume that after Alice chose <span
+class="math inline">\(i\)</span> and Bob chose <span
+class="math inline">\(j\)</span>, there exists another node <span
+class="math inline">\(k\)</span> where <span class="math inline">\(w_k
+&gt; w_j\)</span> and <span class="math inline">\(k\)</span> is not in
+the subtree of <span class="math inline">\(j\)</span>. Since <span
+class="math inline">\(w_k &gt; w_j &gt; w_i\)</span> and <span
+class="math inline">\(k\)</span> is not in the subtree of <span
+class="math inline">\(j\)</span>, node <span
+class="math inline">\(j\)</span> would have been chosen by Alice, which
+contradicts the condition.</p>
+<p>To determine whether such a node <span
+class="math inline">\(j\)</span> exists, perform a DFS traversal of the
+tree and record the timestamp <span class="math inline">\(in_u\)</span>
+when node <span class="math inline">\(u\)</span> is first met and <span
+class="math inline">\(out_u\)</span> when the subtree of node <span
+class="math inline">\(u\)</span> has been visited.</p>
+<p>Let <span class="math inline">\(a_{in_u} = w_u\)</span>. Now we only
+need to check if <span class="math display">\[
+\max\left(\max_{1\le i &lt; in_u}a_i, \max_{out_u &lt; i \le n}
+a_i\right) &gt; w_u.
+\]</span> Overall complexity: <span
 class="math inline">\(\Theta(n)\)</span>.</p>
 
       
