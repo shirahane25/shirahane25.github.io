@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-10-15 10:25:35" itemprop="dateModified" datetime="2025-10-15T10:25:35+08:00">2025-10-15</time>
+                <time title="Modified: 2025-10-15 11:50:55" itemprop="dateModified" datetime="2025-10-15T11:50:55+08:00">2025-10-15</time>
               </span>
 
           
@@ -313,7 +313,7 @@ class="math inline">\(\Theta(2^mn).\)</span></p>
 target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2089/B1">CF2089B1</a></h2>
 <blockquote>
 <p>Given two integer array <span class="math inline">\(a, b\)</span>,
-both of which contains <span class="math inline">\(n\)</span> elements
+both of which contain <span class="math inline">\(n\)</span> elements
 and is <span class="math inline">\(0\)</span>-based. It is guaranteed
 that the sum of all elements in <span class="math inline">\(a\)</span>
 does not exceed the sum of all elements in <span
@@ -329,7 +329,7 @@ class="math inline">\(c_i:=a_{(i−1)\bmod \ n}\)</span>;</li>
 <li>For each <span class="math inline">\(0≤i&lt;n\)</span>: <span
 class="math inline">\(a_i:=c_i\)</span>;</li>
 </ol>
-<p>(The operation 2 and 3 is equivalent to the right-shift of <span
+<p>(The operation 2 and 3 are equivalent to the right-shift of <span
 class="math inline">\(a\)</span>.)</p>
 <p>Find out the minimum number of rounds required for all elements in
 <span class="math inline">\(a\)</span> become equal to <span
@@ -360,6 +360,168 @@ class="math inline">\(d_i = p_i - i\)</span>.</p>
 monotonic stack.</p>
 <p>Overall complexity: <span
 class="math inline">\(\Theta(n)\)</span>.</p>
+<h2 id="cf2085d"><a
+target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2085/D">CF2085D</a></h2>
+<blockquote>
+<p>Given an array <span class="math inline">\(a\)</span> of length <span
+class="math inline">\(n\)</span>, an array <span
+class="math inline">\(d\)</span> of length <span
+class="math inline">\(n\)</span>, and an integer <span
+class="math inline">\(k\)</span>.</p>
+<p>Initially, set the counter <span class="math inline">\(r = 0\)</span>
+and the value <span class="math inline">\(c = 0\)</span>. Iterate <span
+class="math inline">\(i\)</span> from <span
+class="math inline">\(1\)</span> to <span
+class="math inline">\(n\)</span> and perform <strong>one</strong> of the
+following operations:</p>
+<ul>
+<li>Increment <span class="math inline">\(r\)</span> by <span
+class="math inline">\(k\)</span>, and then increment <span
+class="math inline">\(c\)</span> by <span
+class="math inline">\(d_i\)</span>;</li>
+<li>Decrement <span class="math inline">\(r\)</span> by <span
+class="math inline">\(1\)</span>;</li>
+<li>Do nothing, and the value of <span class="math inline">\(r\)</span>
+and <span class="math inline">\(c\)</span> remain unchanged.</li>
+</ul>
+<p>After <span class="math inline">\(n\)</span> operations, the value of
+<span class="math inline">\(r\)</span> must be <span
+class="math inline">\(0\)</span>. Find out the maximum value of <span
+class="math inline">\(c\)</span> that can be obtained.</p>
+</blockquote>
+<p>I came up with an <span class="math inline">\(\Theta(n^2)\)</span> DP
+approach at first, and I found it impossible to optimize it.</p>
+<p>Perform the operations backwards.</p>
+<p>Initially, <span class="math inline">\(r = c = 0\)</span>, and the
+original operations correspond to the following operations,
+respectively:</p>
+<ul>
+<li>Set <span class="math inline">\(r\)</span> to <span
+class="math inline">\(r - k\)</span>, and then set <span
+class="math inline">\(c\)</span> to <span class="math inline">\(c +
+d_i\)</span>;</li>
+<li>Set <span class="math inline">\(r\)</span> to <span
+class="math inline">\(r + 1\)</span>;</li>
+<li>Do nothing.</li>
+</ul>
+<p>Note that <span class="math inline">\(r \ge 0\)</span> must hold
+constantly during the process.</p>
+<p>Consider a regret greedy approach. When processing <span
+class="math inline">\(i\)</span>, we directly take <span
+class="math inline">\(d_i\)</span> and set <span
+class="math inline">\(r\)</span> to <span class="math inline">\(r -
+k\)</span>.</p>
+<p>However, if <span class="math inline">\(r &lt; 0\)</span> after the
+operation, we will replace the previously performed operation 1 with the
+least <span class="math inline">\(d\)</span> with operation 2, and add
+<span class="math inline">\(k+1\)</span> to <span
+class="math inline">\(r\)</span>. Such an operation can be found using a
+heap.</p>
+<p>Overall complexity: <span class="math inline">\(\Theta(n\log
+n)\)</span>.</p>
+<h2 id="cf2082c"><a
+target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2082/C">CF2082C</a></h2>
+<blockquote>
+<p>Given a binary string of length <span
+class="math inline">\(n\)</span>, corresponding to an integer <span
+class="math inline">\(x\)</span>.</p>
+<p>There are two types of operations.</p>
+<ul>
+<li>Replace <span class="math inline">\(x\)</span> with <span
+class="math inline">\(\left\lceil \dfrac{x}{2}
+\right\rceil\)</span>;</li>
+<li>Replace <span class="math inline">\(x\)</span> with <span
+class="math inline">\(\left\lfloor \dfrac{x}{2}
+\right\rfloor\)</span>.</li>
+</ul>
+<p>Perform the operations until <span class="math inline">\(x\)</span>
+becomes <span class="math inline">\(1\)</span>. Each time, each of the
+operations will be performed with possibility <span
+class="math inline">\(\dfrac{1}{2}\)</span>, independently.</p>
+<p>Determine the expected number of operations to make <span
+class="math inline">\(x\)</span> equal to <span
+class="math inline">\(1\)</span>.</p>
+</blockquote>
+<p>Replacing <span class="math inline">\(x\)</span> with <span
+class="math inline">\(\left\lceil \dfrac{x}{2} \right\rceil\)</span> is
+equivalent to replacing it with <span class="math inline">\(\left\lfloor
+\dfrac{x+1}{2} \right\rfloor\)</span>.</p>
+<p>Observe that the number of operations required is either <span
+class="math inline">\(n-1\)</span> or <span
+class="math inline">\(n\)</span>, depending on whether there is a carry
+at the <span class="math inline">\((n-1)\)</span>-th bit.</p>
+<p>Thus, let <span class="math inline">\(f_i\)</span> denote the
+probability with which there is a carry at the <span
+class="math inline">\(i\)</span>-th bit.</p>
+<p>If <span class="math inline">\(s_i = 0\)</span>, the <span
+class="math inline">\(i\)</span>-th bit carries iff the <span
+class="math inline">\((i-1)\)</span>-th bit carries and rounding up is
+applied to the <span class="math inline">\(i\)</span>-th bit. Hence
+<span class="math display">\[
+f_i = \dfrac{1}{2}f_{i-1}(s_i = 0)
+\]</span> If <span class="math inline">\(s_i = 0\)</span>, there are two
+cases.</p>
+<p>If the <span class="math inline">\((i-1)\)</span>-th bit carries,
+then <span class="math inline">\(i\)</span>-th bit will definitely
+carry.</p>
+<p>If the <span class="math inline">\((i-1)\)</span> does not carry,
+then the <span class="math inline">\(i\)</span>-th bit carries iff
+rounding up is applied. Hence <span class="math display">\[
+f_i = \dfrac{1}{2}(1-f_{i-1}) + f_{i-1}(s_i = 1)
+\]</span> In summary: <span class="math display">\[
+\left\{\begin{aligned}
+&amp; f_i = \dfrac{1}{2}f_{i-1}, &amp; s_i = 0 \\
+&amp; f_i = \dfrac{1}{2}(1-f_{i-1}) + f_{i-1}, &amp;s_i = 1
+\end{aligned}\right.
+\]</span> The answer is <span class="math display">\[
+nf_{n-1} + (n-1)(1-f_{n-1})
+\]</span> i.e. <span class="math display">\[
+\boxed{n-1+f_{n-1}}
+\]</span></p>
+<p>Overall complexity: <span
+class="math inline">\(\Theta(n)\)</span>.</p>
+<h2 id="cf2057d"><a
+target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2057/D">CF2057D</a></h2>
+<blockquote>
+<p>Given an integer array <span class="math inline">\(a\)</span> of
+length <span class="math inline">\(n\)</span>. Define the value of <span
+class="math inline">\(a\)</span> as the maximum <span
+class="math inline">\(f(l, r)\)</span> overall <span
+class="math inline">\(1\le l \le r \le n\)</span> where <span
+class="math display">\[
+f(l, r) = \max_{i=l}^r a_i - \min_{i=l}^r -(r-l)
+\]</span> There are also <span class="math inline">\(q\)</span>
+modification <span class="math inline">\((p, x)\)</span>, representing
+setting <span class="math inline">\(a_p\)</span> to <span
+class="math inline">\(x\)</span>.</p>
+<p>Determine the value of <span class="math inline">\(a\)</span>
+initially, and after each modification.</p>
+</blockquote>
+<p>It’s obvious that the maximum and the minimum are located at either
+<span class="math inline">\(l\)</span> or <span
+class="math inline">\(r\)</span>.</p>
+<p>Assume that the minimum is located at <span
+class="math inline">\(l\)</span>, and the maximum is located at <span
+class="math inline">\(r\)</span>. Then we have <span
+class="math display">\[
+f(l, r) = a_r - a_l - (r - l)
+\]</span> i.e. <span class="math display">\[
+f(l, r) = (a_r - r) - (a_l - l)
+\]</span> The two terms are independent. To maximize <span
+class="math inline">\(f(l, r)\)</span>, we will choose the maximum <span
+class="math inline">\(a_r - r\)</span> and the minimum <span
+class="math inline">\(a_l - l\)</span>.</p>
+<p>Maintain a segment tree, nodes of which store <span
+class="math inline">\(mx, mn, ans\)</span>, representing the maximum
+<span class="math inline">\(a_i - i\)</span>, the minimum <span
+class="math inline">\(a_i - i\)</span>, the answer of the corresponding
+segment, respectively. <span class="math inline">\(ans\)</span> can be
+obtained by choosing the maximum value among the answer of the left
+child, the answer of the right child, and the <span
+class="math inline">\(mx\)</span> of the right child minus the <span
+class="math inline">\(mn\)</span> of the left child.</p>
+<p>Overall complexity: <span class="math inline">\(\Theta(q\log
+n)\)</span>.</p>
 
       
     </div>
