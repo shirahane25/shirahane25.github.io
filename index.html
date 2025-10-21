@@ -312,10 +312,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-10-19 18:14:51 / Modified: 22:35:59" itemprop="dateCreated datePublished" datetime="2025-10-19T18:14:51+08:00">2025-10-19</time>
+              <time title="Created: 2025-10-19 18:14:51" itemprop="dateCreated datePublished" datetime="2025-10-19T18:14:51+08:00">2025-10-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-10-21 10:56:20" itemprop="dateModified" datetime="2025-10-21T10:56:20+08:00">2025-10-21</time>
+              </span>
 
           
 
@@ -354,13 +360,13 @@ class="math inline">\(d(i)\)</span>, where</p>
 <li><span class="math inline">\(c(i)\)</span> denotes the number of ways
 to choose elements from set <span class="math inline">\(1\)</span> to
 set <span
-class="math inline">\(\left\lfloor\dfrac{n}{2}\right\rfloor\)</span> so
-that their <span class="math inline">\(\rm lcm\)</span> is <span
+class="math inline">\(\left\lfloor\dfrac{n}{2}\right\rfloor\)</span>
+such that their <span class="math inline">\(\rm lcm\)</span> is <span
 class="math inline">\(i\)</span>.</li>
 <li><span class="math inline">\(d(i)\)</span> denotes the number of ways
 to choose elements from set <span
 class="math inline">\(\left\lfloor\dfrac{n}{2}\right\rfloor + 1\)</span>
-to set <span class="math inline">\(n\)</span> so that their <span
+to set <span class="math inline">\(n\)</span> such that their <span
 class="math inline">\(\rm lcm\)</span> is <span
 class="math inline">\(i\)</span>.</li>
 </ul>
@@ -447,7 +453,7 @@ V)\)</span>.</p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-10-20 21:40:43" itemprop="dateModified" datetime="2025-10-20T21:40:43+08:00">2025-10-20</time>
+                <time title="Modified: 2025-10-21 10:54:31" itemprop="dateModified" datetime="2025-10-21T10:54:31+08:00">2025-10-21</time>
               </span>
 
           
@@ -986,7 +992,7 @@ persistent.</p>
 class="math inline">\(a_i\)</span>. Since <span
 class="math inline">\(\gcd(m, k) | m\)</span>, the following always
 holds: <span class="math display">\[
-(a_i + tk) \bmod m \equiv a_i \pmod{\gcd(m, k)}
+(a_i + tk) \bmod m \equiv (a_i + tk) \pmod{\gcd(m, k)}
 \]</span> <strong>Proof.</strong> Let <span class="math inline">\(x =
 a_i + tk\)</span>. Rewrite <span class="math inline">\(x \bmod
 m\)</span> as follows: <span class="math display">\[
@@ -1017,7 +1023,7 @@ the smallest nonnegative integer <span class="math inline">\(v\)</span>
 such that <span class="math inline">\(a_i \equiv v\pmod{\gcd(m,
 k)}\)</span>. Subsequently, for each <span class="math inline">\(a_i
 (2\le i \le n)\)</span>, let it be the smallest integer <span
-class="math inline">\(v &gt; a_{i-1}\)</span> such that <span
+class="math inline">\(v \ge a_{i-1}\)</span> such that <span
 class="math inline">\(a_i \equiv v\pmod{\gcd(m, k)}\)</span>. If <span
 class="math inline">\(a_n &lt; m\)</span>, we can say that <span
 class="math inline">\(a\)</span> can become sorted. Otherwise, it
