@@ -320,7 +320,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-10-21 10:56:20" itemprop="dateModified" datetime="2025-10-21T10:56:20+08:00">2025-10-21</time>
+                <time title="Modified: 2025-10-22 20:24:52" itemprop="dateModified" datetime="2025-10-22T20:24:52+08:00">2025-10-22</time>
               </span>
 
           
@@ -403,6 +403,173 @@ be computed in <span class="math inline">\(\Theta(V\log\log
 V)\)</span>.</p>
 <p>Overall time complexity: <span class="math inline">\(\Theta(V\log\log
 V)\)</span>.</p>
+<h2 id="noip-round-26"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/contest.php?cid=2320">NOIP
+Round 26</a></h2>
+<h3 id="problem-a.-hope"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2320&amp;pid=0">Problem
+A. Hope</a></h3>
+<blockquote>
+<p>There are <span class="math inline">\(n\)</span> main buildings
+numbered <span class="math inline">\(1,\ldots,n\)</span> arranged on a
+circle with circumference <span class="math inline">\(C\)</span>. The
+<span class="math inline">\(i\)</span>-th building is located at
+position <span class="math inline">\(L_i(0\le L_i&lt;C)\)</span> along
+the circle and has a height of <span class="math inline">\(h_i\)</span>.
+There is one more building, the student center, located at the center of
+the circle whose height is not decided yet.</p>
+<p>You need to connect the <span class="math inline">\(n+1\)</span>
+buildings with some straight tunnels such that any building can reach
+any other building using these tunnels. A tunnel can be modeled as a
+line segment (in a <span class="math inline">\(2\)</span>-dimensional
+plane) connecting two of the buildings. All these tunnels will be at the
+same elevation, so their corresponding line segments must not intersect
+(except at endpoints). For some reason, the cost of constructing a
+tunnel between two buildings with heights <span
+class="math inline">\(h_1\)</span> and <span
+class="math inline">\(h_2\)</span> is equal to <span
+class="math inline">\(|h_1−h_2|\)</span>.</p>
+<p>Given <span class="math inline">\(q\)</span> queries <span
+class="math inline">\(m_1, \ldots, m_q\)</span>, where you have to
+determine the minimum possible cost to connect all the buildings if the
+student center has a height of <span
+class="math inline">\(m_i\)</span>.</p>
+<p><span class="math inline">\(1\le n\le 500, 1\le q\le10^6,1\le C \le
+10^9\)</span>.</p>
+<p>It is guaranteed that there do not exist two diametrically opposite
+buildings.</p>
+</blockquote>
+<p>First, let’s sort the buildings by <span
+class="math inline">\(L_i\)</span>. We need to connect <span
+class="math inline">\(n\)</span> non-intersecting edges to form a tree
+connecting <span class="math inline">\(n+1\)</span> buildings.</p>
+<p>Consider the case where we removed the center of the circle.</p>
+<p>Typically, we break the cycle into a chain. In particular, let <span
+class="math inline">\(L_{i + n} = L_{i} + C, h_{i + n} = h_i\)</span>
+for <span class="math inline">\(1 \le i \le n\)</span>.</p>
+<p>Then, we apply a DP approach.</p>
+<p>Let <span class="math inline">\(f_{l, r}\)</span> denote the minimum
+cost to connect buildings in <span class="math inline">\([l,
+r]\)</span>, using only internal edges. There are two cases:</p>
+<ul>
+<li><p>We do not connect an edge between <span
+class="math inline">\(l\)</span> and <span
+class="math inline">\(r\)</span>. Thus, there must exist a building
+<span class="math inline">\(k \in (l, r)\)</span>, such that both
+buildings in <span class="math inline">\([l, k]\)</span> and buildings
+in <span class="math inline">\([k, r]\)</span> are connected. <span
+class="math display">\[
+f_{l, r} = \min_{l&lt;k&lt;r}f_{l, k} + f_{k, r}
+\]</span></p></li>
+<li><p>We connect an edge between <span class="math inline">\(l\)</span>
+and <span class="math inline">\(r\)</span>. Since <span
+class="math inline">\(l\)</span> and <span
+class="math inline">\(r\)</span> are connected by the edge, there must
+exist a building <span class="math inline">\(k \in [l, r)\)</span>, such
+that both buildings in <span class="math inline">\([l, k]\)</span> and
+buildings in <span class="math inline">\([k + 1, r]\)</span> are
+connected.</p></li>
+</ul>
+<p><span class="math display">\[
+f_{l, r} = \min_{l \le k &lt; r}f_{l, k} + f_{k + 1, r} + |h_l - h_r|
+\]</span></p>
+<p>Now, we need to replace some edges to connect the center of the
+circle. Let the height of the central building be <span
+class="math inline">\(x\)</span>. Assume that the central building is
+connected to buildings <span class="math inline">\(a_1, a_2, \cdots
+a_k\)</span>, in clockwise order.</p>
+<p><strong>Key observation: In an optimal solution, the central building
+will be connected to at most <span class="math inline">\(2\)</span>
+buildings, one higher than <span class="math inline">\(x\)</span> and
+one lower than <span class="math inline">\(x\)</span>.</strong></p>
+<p><strong>Proof.</strong> Consider the central building is connected to
+two buildings <span class="math inline">\(a_i\)</span> and <span
+class="math inline">\(a_{i+1}\)</span>, where <span
+class="math inline">\(h_{a_i}, h_{a_{i+1}} \ge x\)</span>. We always
+have <span class="math display">\[
+|h_{a_i} - x| + |h_{a_{i+1}} - x| \ge |h_{a_i} - h_{a_{i+1}}|
+\]</span> Hence, we can replace the two edges with an edge between <span
+class="math inline">\(a_i\)</span> and <span
+class="math inline">\(a_{i+1}\)</span>, which will not make the answer
+worse.</p>
+<p>It can be shown that the replacement will not increase restrictions
+on connectivity, that is, if a certain edge between <span
+class="math inline">\(u\)</span> and <span
+class="math inline">\(v\)</span> cannot be connected before, then it
+still cannot be connected after the replacement. Similarly, if a certain
+edge between <span class="math inline">\(u\)</span> and <span
+class="math inline">\(v\)</span> can be connected before, the
+replacement will not make it unable to be connected either.</p>
+<figure>
+<img src="D:\blog\source\uploads\QQ20251022-193448.png"
+alt="QQ20251022-193448" />
+<figcaption aria-hidden="true">QQ20251022-193448</figcaption>
+</figure>
+<p>The case where <span class="math inline">\(h_{a_i}, h_{a_{i+1}} \le
+x\)</span> is symmetric, so the same conclusion applies.</p>
+<p>Hence, if we sequentially proceed the replacement above, eventually
+there will be at most one building whose height <span
+class="math inline">\(\ge x\)</span> and at most one building whose
+height <span class="math inline">\(\le x\)</span>.</p>
+<p>Therefore, for a fixed <span class="math inline">\(x\)</span>, there
+are only two ways to connect the central building optimally. Assume that
+we break the circle into a chain, starting at <span
+class="math inline">\(l\)</span> and ends at <span
+class="math inline">\(r = l + n - 1\)</span>.</p>
+<ul>
+<li><p>The central building is only connected to one building <span
+class="math inline">\(k\)</span>. The cost is <span
+class="math display">\[
+f_{l, k} + f_{k, r} + |h_k - x|
+\]</span></p></li>
+<li><p>The central building is connected to exactly two buildings <span
+class="math inline">\(i\)</span> and <span
+class="math inline">\(j\)</span>. The cost is <span
+class="math display">\[
+\begin{aligned}
+&amp; f_{l, i} + f_{j, r} + \min(f_{i+1,j}, f_{i, j - 1}) + |h_i - x| +
+|h_j - x|\\
+= &amp;f_{l, i} + f_{j, r} + \min(f_{i + 1, j}, f_{i, j - 1}) + |h_i -
+h_j|
+\end{aligned}
+\]</span></p></li>
+</ul>
+<p>The DP approach runs in <span
+class="math inline">\(\Theta(n^3)\)</span>, and for a fixed <span
+class="math inline">\(x\)</span>, computing the answer is <span
+class="math inline">\(\Theta(n^3)\)</span>. Thus, the overall complexity
+for <span class="math inline">\(q\)</span> queries is <span
+class="math inline">\(\Theta(qn^3)\)</span>, which needs optimizing.</p>
+<p>Note that, for a building <span class="math inline">\(k\)</span>,
+assuming that <span class="math inline">\(x \le h_k\)</span>, then the
+cost is <span class="math inline">\(f_{l, k} + f_{k, r} + h_k -
+x\)</span>, which shows that <span class="math inline">\(f_{l, k} +
+f_{k, r} + h_k\)</span> can contribute to each <span
+class="math inline">\(x \in [0, h_k]\)</span>. I call this kind of
+contribution type <span class="math inline">\(0\)</span>.</p>
+<p>Similarly, assuming that <span class="math inline">\(x \ge
+h_k\)</span>, <span class="math inline">\(f_{l, k} + f_{k, r} -
+h_k\)</span> can contribute to each <span class="math inline">\(x &gt;
+h_k\)</span>. I call this kind of contribution type <span
+class="math inline">\(1\)</span>.</p>
+<p>For a pair <span class="math inline">\((i, j)\)</span>, then <span
+class="math inline">\(f_{l, i} + f_{j, r} + \min(f_{i + 1, j}, f_{i, j -
+1}) + |h_i - h_j|\)</span> can contribute to each <span
+class="math inline">\(x\in [\min(h_i, h_j), \max(h_i, h_j)]\)</span>. I
+call this kind of contribution type <span
+class="math inline">\(2\)</span>.</p>
+<p>For each <span class="math inline">\(x\)</span>, maintain the minimum
+contributions of each type respectively, represented by <span
+class="math inline">\(c_0,c_1, c_2\)</span>. We can compute the answer
+to <span class="math inline">\(x\)</span> easily: <span
+class="math display">\[
+\min(c_0 - x, c_1 + x, c_2)
+\]</span> Maintain a segment tree on range, supporting range updates and
+point queries. Since the range of <span class="math inline">\(h\)</span>
+and <span class="math inline">\(x\)</span> are large, discretization is
+required.</p>
+<p>Overall complexity: <span class="math inline">\(\Theta(n^3 +
+n^2\log(n + q) + q\log n)\)</span>.</p>
 
       
     </div>
