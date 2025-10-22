@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="NOI Round 8 Problem A. LCM  Given \(n\) sets, each of which contains positive integers ranged from \([1, m]\). From each set, you must choose exactly one element and compute their \(\rm lcm\)">
+  <meta name="description" content="NOIP Round 25 Problem A  Given a tree consisting of \(n\) nodes, numbered from \(1\) to \(n\). Determine the number of permutations \(p\) of length \(n\) satisfying the following condition, mo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Oct Joint Contests">
 <meta property="og:url" content="http://example.com/2025/10/19/Oct-Joint-Contests/index.html">
 <meta property="og:site_name" content="Shirahane&#39;s Blog">
-<meta property="og:description" content="NOI Round 8 Problem A. LCM  Given \(n\) sets, each of which contains positive integers ranged from \([1, m]\). From each set, you must choose exactly one element and compute their \(\rm lcm\)">
+<meta property="og:description" content="NOIP Round 25 Problem A  Given a tree consisting of \(n\) nodes, numbered from \(1\) to \(n\). Determine the number of permutations \(p\) of length \(n\) satisfying the following condition, mo">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="d:\blog\source\uploads\QQ20251022-193448.png">
+<meta property="og:image" content="http://example.com/2025/10/19/Oct-Joint-Contests/uploads/QQ20251022-193448.png">
 <meta property="article:published_time" content="2025-10-19T10:14:51.000Z">
-<meta property="article:modified_time" content="2025-10-22T12:24:52.663Z">
+<meta property="article:modified_time" content="2025-10-22T12:49:27.812Z">
 <meta property="article:author" content="Shirahane">
 <meta property="article:tag" content="Joint Contests">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:\blog\source\uploads\QQ20251022-193448.png">
+<meta name="twitter:image" content="http://example.com/2025/10/19/Oct-Joint-Contests/uploads/QQ20251022-193448.png">
 
 <link rel="canonical" href="http://example.com/2025/10/19/Oct-Joint-Contests/">
 
@@ -198,7 +198,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-10-22 20:24:52" itemprop="dateModified" datetime="2025-10-22T20:24:52+08:00">2025-10-22</time>
+                <time title="Modified: 2025-10-22 20:49:27" itemprop="dateModified" datetime="2025-10-22T20:49:27+08:00">2025-10-22</time>
               </span>
 
           
@@ -219,7 +219,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="noi-round-8"><a
+        <h2 id="noip-round-25"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/contest.php?cid=2319">NOIP
+Round 25</a></h2>
+<h3 id="problem-a"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2319&amp;pid=0">Problem
+A</a></h3>
+<blockquote>
+<p>Given a tree consisting of <span class="math inline">\(n\)</span>
+nodes, numbered from <span class="math inline">\(1\)</span> to <span
+class="math inline">\(n\)</span>. Determine the number of permutations
+<span class="math inline">\(p\)</span> of length <span
+class="math inline">\(n\)</span> satisfying the following condition,
+modulo <span class="math inline">\(998244353\)</span>:</p>
+<ul>
+<li><span class="math inline">\(\forall 1\le x, y \le n\)</span> and
+<span class="math inline">\(x\)</span> and <span
+class="math inline">\(y\)</span> are connected, then <span
+class="math inline">\(p_x\)</span> and <span
+class="math inline">\(p_y\)</span> should also be connected.</li>
+</ul>
+<p><span class="math inline">\(1\le n\le 10^5\)</span>.</p>
+</blockquote>
+<p>The problem is equivalent to counting the number of tree <span
+class="math inline">\(T\)</span> such that <span
+class="math inline">\(S\)</span> and <span
+class="math inline">\(T\)</span> are isomorphic. In other words, count
+the number of automorphisms of <span
+class="math inline">\(S\)</span>.</p>
+<p><strong>Property <span class="math inline">\(1\)</span></strong>: A
+tree has at most <span class="math inline">\(2\)</span> centroids, and
+there are two of them, they must be adjacent.</p>
+<p><strong>Property <span class="math inline">\(2\)</span></strong>: In
+a tree <span class="math inline">\(T\)</span> isomorphic to <span
+class="math inline">\(S\)</span>, the centroids either remain unchanged
+or swap with each other.</p>
+<h2 id="noi-round-8"><a
 target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/contest.php?cid=2255">NOI Round
 8</a></h2>
 <h3 id="problem-a.-lcm"><a
@@ -385,11 +420,7 @@ still cannot be connected after the replacement. Similarly, if a certain
 edge between <span class="math inline">\(u\)</span> and <span
 class="math inline">\(v\)</span> can be connected before, the
 replacement will not make it unable to be connected either.</p>
-<figure>
-<img src="D:\blog\source\uploads\QQ20251022-193448.png"
-alt="QQ20251022-193448" />
-<figcaption aria-hidden="true">QQ20251022-193448</figcaption>
-</figure>
+<p><img src="uploads/QQ20251022-193448.png" /></p>
 <p>The case where <span class="math inline">\(h_{a_i}, h_{a_{i+1}} \le
 x\)</span> is symmetric, so the same conclusion applies.</p>
 <p>Hence, if we sequentially proceed the replacement above, eventually
@@ -538,10 +569,12 @@ n^2\log(n + q) + q\log n)\)</span>.</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#noi-round-8"><span class="nav-number">1.</span> <span class="nav-text">NOI Round
-8</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-a.-lcm"><span class="nav-number">1.1.</span> <span class="nav-text">Problem
-A. LCM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#noip-round-26"><span class="nav-number">2.</span> <span class="nav-text">NOIP
-Round 26</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-a.-hope"><span class="nav-number">2.1.</span> <span class="nav-text">Problem
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#noip-round-25"><span class="nav-number">1.</span> <span class="nav-text">NOIP
+Round 25</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-a"><span class="nav-number">1.1.</span> <span class="nav-text">Problem
+A</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#noi-round-8"><span class="nav-number">2.</span> <span class="nav-text">NOI Round
+8</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-a.-lcm"><span class="nav-number">2.1.</span> <span class="nav-text">Problem
+A. LCM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#noip-round-26"><span class="nav-number">3.</span> <span class="nav-text">NOIP
+Round 26</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-a.-hope"><span class="nav-number">3.1.</span> <span class="nav-text">Problem
 A. Hope</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
