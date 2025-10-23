@@ -320,7 +320,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-10-22 21:31:53" itemprop="dateModified" datetime="2025-10-22T21:31:53+08:00">2025-10-22</time>
+                <time title="Modified: 2025-10-23 14:34:52" itemprop="dateModified" datetime="2025-10-23T14:34:52+08:00">2025-10-23</time>
               </span>
 
           
@@ -533,6 +533,18 @@ connected.</p></li>
 <p><span class="math display">\[
 f_{l, r} = \min_{l \le k &lt; r}f_{l, k} + f_{k + 1, r} + |h_l - h_r|
 \]</span></p>
+<p>Also, for the sake of convenience, we would like that the innermost
+edges form a convex polygon, so that every building can be connected to
+the center without intersecting with other edges. Hence, if the length
+of the arc between <span class="math inline">\(l\)</span> and <span
+class="math inline">\(r\)</span> exceeds <span
+class="math inline">\(\dfrac{C}{2}\)</span>, we will not consider
+connecting them.</p>
+<p><img src="/uploads/screen-shot-2025-10-23-141245.png" /></p>
+<p>The red line in the picture represents where we break the circle into
+a chain.</p>
+<p>Clearly, the constraints we add will not affect the correctness of
+the DP.</p>
 <p>Now, we need to replace some edges to connect the center of the
 circle. Let the height of the central building be <span
 class="math inline">\(x\)</span>. Assume that the central building is
