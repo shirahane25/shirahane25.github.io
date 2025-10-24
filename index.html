@@ -800,7 +800,7 @@ denotes the range of the elements.</p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-10-21 10:54:31" itemprop="dateModified" datetime="2025-10-21T10:54:31+08:00">2025-10-21</time>
+                <time title="Modified: 2025-10-24 21:41:57" itemprop="dateModified" datetime="2025-10-24T21:41:57+08:00">2025-10-24</time>
               </span>
 
           
@@ -1405,6 +1405,135 @@ class="math inline">\(q\)</span> queries efficiently.</p>
 class="math inline">\(\Theta(d(m))\)</span>, where <span
 class="math inline">\(d(m)\)</span> denotes the number of divisors of
 <span class="math inline">\(m\)</span>.</p>
+<h2 id="cf2124e"><a
+target="_blank" rel="noopener" href="https://codeforces.com/contest/2124/problem/E">CF2124E</a></h2>
+<blockquote>
+<p>Given an array <span class="math inline">\(a\)</span>, consisting of
+<span class="math inline">\(n\)</span> positive integers. You are
+allowed to do the following operation:</p>
+<ul>
+<li>Select an array <span class="math inline">\(b\)</span> of size <span
+class="math inline">\(n\)</span> such that the following properties
+hold:
+<ul>
+<li><span class="math inline">\(0≤b_i≤a_i\)</span> for each <span
+class="math inline">\(1\le i\le n\)</span>.</li>
+<li>There exists an index <span class="math inline">\(1\le
+i&lt;n\)</span> such that <span
+class="math inline">\(b_1+b_2+\dots+b_i=b_{i+1}+b_{i+2}+\dots+b_n\)</span>.</li>
+</ul></li>
+<li>Then, subtract <span class="math inline">\(b_i\)</span> from <span
+class="math inline">\(a_i\)</span> for each <span
+class="math inline">\(1\le i \le n\)</span>.</li>
+</ul>
+<p>Your task is to change all the elements to <span
+class="math inline">\(0\)</span>. Find the <strong>minimum</strong>
+number of operations required.</p>
+<p>Then, output a way to perform the operations. If it is impossible to
+change all the elements of a to <span class="math inline">\(0\)</span>
+no matter how many operations are used, print <span
+class="math inline">\(-1\)</span> instead.</p>
+<p><span class="math inline">\(2\le n\le 5\cdot10^4, 1\le a_i \le
+10^{12}\)</span>.</p>
+</blockquote>
+<p>First, let’s determine when there is no solution. Let <span
+class="math display">\[
+\begin{aligned}
+&amp;S = \sum\limits_{i=1}^n a_i\\
+s = b_1+b_2+\dots+&amp;b_i=b_{i+1}+b_{i+2}+\dots+b_n
+\end{aligned}
+\]</span> In one operation, we subtract <span
+class="math inline">\(2s\)</span> from <span
+class="math inline">\(S\)</span>. If <span
+class="math inline">\(S\)</span> is odd, there is definitely no
+solution.</p>
+<p>Let <span class="math inline">\(mx\)</span> be the maximum value
+among all <span class="math inline">\(a_i\)</span>. Once we subtract
+<span class="math inline">\(s\)</span> from <span
+class="math inline">\(mx\)</span>, we subtract <span
+class="math inline">\(s\)</span> from the rest of the elements as well.
+Thus, if <span class="math inline">\(2mx &gt; S\)</span>, we cannot make
+<span class="math inline">\(mx\)</span> become <span
+class="math inline">\(0\)</span>.</p>
+<p>Otherwise, there must exist a solution. We can simply subtract <span
+class="math inline">\(1\)</span> from an element and <span
+class="math inline">\(1\)</span> from <span
+class="math inline">\(mx\)</span>.</p>
+<hr />
+<p>Now, we need to minimize the number of operations.</p>
+<p>Let’s make some observations by considering cases where <span
+class="math inline">\(n\)</span> is small.</p>
+<p>If <span class="math inline">\(n = 2\)</span>, it is obvious that
+there is solution if and only if <span class="math inline">\(a_1 =
+a_2\)</span>.</p>
+<p>If <span class="math inline">\(n=3\)</span>, there are two simple
+cases where <span class="math inline">\(a_1 = a_2 + a_3\)</span> and
+<span class="math inline">\(a_1 + a_2 = a_3\)</span> with only <span
+class="math inline">\(1\)</span> operations required.</p>
+<p>Otherwise, we have <span class="math display">\[
+2a_2 \le a_1 + a_2 + a_3 \Leftrightarrow a_2 \le a_1 + a_3
+\]</span> Consider the case where <span class="math inline">\(a_1 + a_3
+= a_2\)</span>. We can always find a solution with <span
+class="math inline">\(2\)</span> operations.</p>
+<ul>
+<li>Choose <span class="math inline">\(b = [a_1, a_1, 0]\)</span>. After
+the operation, <span class="math inline">\(a = [0, a_2 - a_1, a_3] = [0,
+a_3, a_3]\)</span>.</li>
+<li>Choose <span class="math inline">\(b = [0, a_3, a_3]\)</span>. After
+the operation, <span class="math inline">\(a= [0, 0, 0]\)</span>.</li>
+</ul>
+<p>Now let’s generalize to <span class="math inline">\(a_2 \le a_1 +
+a_3\)</span>. We can perform the following operation to reduce to <span
+class="math inline">\(a_1 + a_3 = a_2\)</span>, and we find a solution
+with <span class="math inline">\(3\)</span> operations:</p>
+<ul>
+<li>Choose <span class="math inline">\(b = \left[ \frac{a_1 + a_3 -
+a_2}{2}, 0, \frac{a_1 + a_3 - a_2}{2} \right]\)</span>. After the
+operation, <span class="math inline">\(a= [\frac{a_1 - a_3 + a_2}{2},
+a_2, \frac{a_2 - a_1 + a_3}{2}]\)</span>.</li>
+<li>Choose <span class="math inline">\(b = [\frac{a_1 - a_3 + a_2}{2},
+\frac{a_1 - a_3 + a_2}{2}, 0]\)</span>. After the operation, <span
+class="math inline">\(a = [0, \frac{a_2 - a_1 + a_3}{2}, \frac{a_2 - a_1
++ a_3}{2}]\)</span>.</li>
+<li>Choose <span class="math inline">\(b = [0, \frac{a_2 - a_1 +
+a_3}{2}, \frac{a_2 - a_1 + a_3}{2}]\)</span>. After the operation, <span
+class="math inline">\(a = [0, 0, 0]\)</span>.</li>
+</ul>
+<p>Such an operation is always feasible since <span
+class="math inline">\(a_1 + a_3 - a_2\)</span> and <span
+class="math inline">\(a_1 + a_3 - a_2\)</span> must be even.</p>
+<p>Note that we can actually combine the first two operations.</p>
+<p>Thus, we find a general solution for <span class="math inline">\(n =
+3\)</span> cases where <span class="math inline">\(a_2 \le a_1 +
+a_3\)</span> with <span class="math inline">\(2\)</span> operations:</p>
+<ul>
+<li>Choose <span class="math inline">\(b = [a_1, \frac{a_1 - a_3 +
+a_2}{2}, \frac{a_1 + a_3 - a_2}{2}]\)</span>. After the operation, <span
+class="math inline">\(a = [0, \frac{a_2 - a_1 + a_3}{2}, \frac{a_2 - a_1
++ a_3}{2}]\)</span>.</li>
+<li>Choose <span class="math inline">\(b = [0, \frac{a_2 - a_1 +
+a_3}{2}, \frac{a_2 - a_1 + a_3}{2}]\)</span>. After the operation, <span
+class="math inline">\(a = [0, 0, 0]\)</span>.</li>
+</ul>
+<hr />
+<p>Now let’s generalize to <span class="math inline">\(n &gt; 3\)</span>
+cases.</p>
+<p>We divide the array <span class="math inline">\(a\)</span> into three
+continuous subarrays, sums of which are <span class="math inline">\(s_1,
+s_2, s_3\)</span>, respectively. In this way, we reduce to <span
+class="math inline">\(n=3\)</span> cases above.</p>
+<p>Note that <span class="math inline">\(2\max(s_1, s_2, s_3) \le
+S\)</span> must holds.</p>
+<p>To satisfy the condition, we will find the first <span
+class="math inline">\(p\)</span> satisfying <span
+class="math display">\[
+2\sum_{i=1}^{p-1} a_i \le S \wedge 2\sum_{i=1}^p a_i &gt; S
+\]</span> and let the first subarray be <span class="math inline">\(a[1,
+\dots, p - 1]\)</span>, the second be <span
+class="math inline">\(a_{p}\)</span>, the third be <span
+class="math inline">\(a[p +1, \dots, n]\)</span>.</p>
+<p>Overall complexity: <span
+class="math inline">\(\Theta(n)\)</span>.</p>
 
       
     </div>
