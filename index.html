@@ -320,7 +320,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-10-24 08:29:38" itemprop="dateModified" datetime="2025-10-24T08:29:38+08:00">2025-10-24</time>
+                <time title="Modified: 2025-10-24 20:44:45" itemprop="dateModified" datetime="2025-10-24T20:44:45+08:00">2025-10-24</time>
               </span>
 
           
@@ -638,6 +638,118 @@ and <span class="math inline">\(x\)</span> are large, discretization is
 required.</p>
 <p>Overall complexity: <span class="math inline">\(\Theta(n^3 +
 n^2\log(n + q) + q\log n)\)</span>.</p>
+<h2 id="noip-round-27"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/contest.php?cid=2325">NOIP
+Round 27</a></h2>
+<h3 id="problem-a.-interval"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2325&amp;pid=0">Problem
+A. interval</a></h3>
+<blockquote>
+<p>Given an array <span class="math inline">\(a\)</span> of length <span
+class="math inline">\(n\)</span> consisting of positive integers.</p>
+<p>Define <span class="math display">\[
+f(l, r) = \left(\max_{i=l}^r a_i\right) \times \left(\min_{i=l}^r
+a_i\right)
+\]</span> Find the sum of the <span class="math inline">\(k\)</span>
+largest <span class="math inline">\(f(l, r)\)</span> overall <span
+class="math inline">\(1\le l \le r \le n\)</span>.</p>
+<p><span class="math inline">\(1\le n\le 5\cdot 10^5, 1 \le k \le
+\dfrac{n(n+1)}{2}, 1\le a_i \le 10^9\)</span>.</p>
+</blockquote>
+<p>Let <span class="math inline">\(m\)</span> be the largest value such
+that <span class="math display">\[
+\#\{1\le l\le r \le n, f(l, r) \ge m\} \ge k
+\]</span> Let <span class="math inline">\(\#\{1\le l\le r \le n, f(l, r)
+\ge m\} = c\)</span>, then the answer equals <span
+class="math display">\[
+\sum_{1\le l\le r \le n, f(l, r) \ge m} f(l, r) - (c - k)m
+\]</span> It’s obvious that <span class="math inline">\(m\)</span> is
+monotonic, so we perform binary search on <span
+class="math inline">\(m\)</span>. Assume that we need to determine the
+value of <span class="math display">\[
+\#\{1\le l\le r \le n, f(l, r) \ge x\}
+\]</span> Let</p>
+<ul>
+<li><span class="math inline">\(L_i\)</span> denote the nearest index
+<span class="math inline">\(j\)</span> to the left of <span
+class="math inline">\(i\)</span> such that <span
+class="math inline">\(a_j &gt; a_i\)</span>. If such <span
+class="math inline">\(j\)</span> does not exist, set <span
+class="math inline">\(L_i\)</span> to <span
+class="math inline">\(0\)</span>.</li>
+<li><span class="math inline">\(R_i\)</span> denote the nearest index
+<span class="math inline">\(j\)</span> to the right of <span
+class="math inline">\(i\)</span> such that <span
+class="math inline">\(a_j \ge a_i\)</span>. If such <span
+class="math inline">\(j\)</span> does not exist, set <span
+class="math inline">\(R_i\)</span> to <span class="math inline">\(n +
+1\)</span>.</li>
+</ul>
+<p>Hence, for each segment <span class="math inline">\([l, r]\)</span>
+where <span class="math inline">\(L_p&lt; l \le p \le r &lt;
+R_p\)</span>, the value of <span class="math inline">\(\max\limits_{L_p
+&lt; i &lt; R_p}a_i = a_p\)</span>, which is fixed. We will iterate one
+of the endpoints of the segment.</p>
+<p>Assume that <span class="math inline">\(p - L_p &lt; R_p -
+p\)</span>, we iterate each <span class="math inline">\(i\)</span> from
+<span class="math inline">\(p\)</span> down to <span
+class="math inline">\(L_p + 1\)</span>. For a fixed endpoint <span
+class="math inline">\(i\)</span>, we need to find another endpoint <span
+class="math inline">\(j \in [p, R_p)\)</span> such that <span
+class="math inline">\(a_p \cdot \min\limits_{i\le k\le j}a_k \ge
+x\)</span>.</p>
+<p>If <span class="math inline">\(\left(\min\limits_{i \le j \le p}
+a_j\right) \cdot a_p &lt; x\)</span>, clearly whatever value <span
+class="math inline">\(j\)</span> equals, <span class="math inline">\(a_p
+\cdot \min\limits_{i\le k\le j}a_k &lt; x\)</span> always holds.</p>
+<p>Otherwise, there may exist some <span
+class="math inline">\(j\)</span>’s satisfying the condition. <span
+class="math display">\[
+a_p \cdot \min\limits_{i\le k\le j}a_k \ge x \Leftrightarrow
+\min\limits_{i\le k\le j}a_k \ge \color{red}\left\lceil \dfrac{x}{a_p}
+\right\rceil
+\]</span> where the red term is fixed.</p>
+<p>Note that $_{ikj}a_k $ is <strong>non-increasing</strong> as <span
+class="math inline">\(j\)</span> increases. Thus, we perform binary
+search and find the largest such <span class="math inline">\(j\)</span>.
+Then all segments <span class="math inline">\([l, r]\)</span> where
+<span class="math inline">\(l = i, r \in [p, j]\)</span> satisfy the
+condition, so we add <span class="math inline">\(j - p + 1\)</span> to
+the count.</p>
+<p>The case where <span class="math inline">\(p - L_p \ge R_p -
+p\)</span> is symmetric, so a similar approach applies.</p>
+<p>We have determined the value of <span
+class="math inline">\(m\)</span>. Now we need to compute <span
+class="math display">\[
+\sum_{1\le l\le r \le n, f(l, r) \ge m} f(l, r) - (c - k)m
+\]</span> Similarly, we fix the maximum <span
+class="math inline">\(a_p\)</span>, iterate left point <span
+class="math inline">\(i\)</span> (or right endpoint symmetrically) and
+find the largest such <span class="math inline">\(j\)</span>. We need to
+compute <span class="math display">\[
+G(i, p, j) = \sum_{k=p}^j \min_{t=i}^k a_t
+\]</span> In order to compute efficiently, let’s consider prefix
+sums.</p>
+<p>Define <span class="math display">\[
+g_i = G(i, i, n) = \sum_{k=i}^n \min_{t=i}^k a_t
+\]</span> We have <span class="math display">\[
+G(i, p, j) = G(i, i, j) - G(i, i, p - 1)
+\]</span> so we can focus on the computation of <span
+class="math inline">\(G(i, i, r)\)</span>.</p>
+<p>Let <span class="math inline">\(mn = \min\limits_{i \le k \le r}
+a_k\)</span>. We perform binary search to find the nearest index <span
+class="math inline">\(j\)</span> to the right of <span
+class="math inline">\(r\)</span> such that <span
+class="math inline">\(a_j &lt; mn\)</span>. Thus <span
+class="math display">\[
+G(i, i, r) = g_i - g_j - (j - 1 - i)mn
+\]</span> where <span class="math inline">\(g\)</span> can be obtained
+using a monotonic stack.</p>
+<p>The case where <span class="math inline">\(p - L_p \ge R_p -
+p\)</span> is symmetric, so a similar approach applies.</p>
+<p>Overall complexity: <span class="math inline">\(\Theta(n\log V \log n
++ n\log^2 n)\)</span>, where <span class="math inline">\(V\)</span>
+denotes the range of the elements.</p>
 
       
     </div>
