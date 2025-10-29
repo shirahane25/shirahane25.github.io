@@ -800,7 +800,7 @@ denotes the range of the elements.</p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-10-24 21:45:08" itemprop="dateModified" datetime="2025-10-24T21:45:08+08:00">2025-10-24</time>
+                <time title="Modified: 2025-10-29 16:41:21" itemprop="dateModified" datetime="2025-10-29T16:41:21+08:00">2025-10-29</time>
               </span>
 
           
@@ -1534,6 +1534,95 @@ class="math inline">\(a_{p}\)</span>, the third be <span
 class="math inline">\(a[p +1, \dots, n]\)</span>.</p>
 <p>Overall complexity: <span
 class="math inline">\(\Theta(n)\)</span>.</p>
+<h2 id="cf1992g"><a
+target="_blank" rel="noopener" href="https://codeforces.com/contest/1992/problem/G">CF1992G</a></h2>
+<blockquote>
+<p>Let <span class="math inline">\(\textrm{MEX}(S, k)\)</span> be the
+<span class="math inline">\(k\)</span>-th <strong>positive</strong>
+integer in ascending order that is not present in <span
+class="math inline">\(S\)</span>.</p>
+<p>Denote <span class="math inline">\(\textrm{MEOW}(a)\)</span> as the
+sum of <span class="math inline">\(\textrm{MEX}(b, |b| + 1)\)</span>
+over all distinct subsets <span class="math inline">\(b\)</span> of
+array <span class="math inline">\(a\)</span>.</p>
+<p>Given an array <span class="math inline">\(a\)</span> of length <span
+class="math inline">\(n\)</span>, consisting of <span
+class="math inline">\(1,2,\dots, n\)</span>. Determine the value of
+<span class="math inline">\(\textrm{MEOW}(a)\)</span>.</p>
+<p><span class="math inline">\(1\le n \le 5000\)</span>.</p>
+</blockquote>
+<p>Consider a subset <span class="math inline">\(b\)</span> of array
+<span class="math inline">\(a\)</span>. Assume that the maximum value in
+<span class="math inline">\(b\)</span> is <span
+class="math inline">\(m\)</span>, and there are exactly <span
+class="math inline">\(x\)</span> numbers <span
+class="math inline">\(&lt; m\)</span> that are not present in <span
+class="math inline">\(b\)</span>. We have <span class="math display">\[
+\begin{gather*}
+m - x = |b| \\
+\textrm{MEX}(b, |b| + 1) = \textrm{MEX}(b, m - x + 1)
+\end{gather*}
+\]</span> For convenience, let <span class="math inline">\(T =
+\operatorname{MEX}(b, m - x + 1)\)</span>. We now distinguish between
+two cases.</p>
+<p>If <span class="math inline">\(|b| + 1 = m - x + 1 &gt; x\)</span>,
+i.e. <span class="math inline">\(m \ge 2x\)</span>, then <span
+class="math inline">\(T &gt; m\)</span> holds, which implies that <span
+class="math display">\[
+\begin{aligned}
+T = m + |b| + 1 - x = 2m - 2x + 1
+\end{aligned}
+\]</span> Thus, for fixed <span class="math inline">\(m\)</span> and
+<span class="math inline">\(x\)</span>, their contribution to the final
+answer is <span class="math display">\[
+(2m - 2x + 1)\binom{m - 1}{x}
+\]</span> Otherwise, <span class="math inline">\(m &lt; 2x\)</span>,
+and, <span class="math inline">\(T &lt; m\)</span> holds.</p>
+<p>Since <span class="math inline">\(T\)</span> is undetermined, we can
+simply enumerate all possible values of <span
+class="math inline">\(T\)</span> from <span
+class="math inline">\(1\)</span> to <span class="math inline">\(m -
+1\)</span>.</p>
+<p>Consider the current <span class="math inline">\(T\)</span>, which is
+the <span class="math inline">\((m-x+1)\)</span>-th integer that is not
+present. Hence, there are <span class="math inline">\(m-x\)</span>
+integers <span class="math inline">\(\in [1, T)\)</span> and <span
+class="math inline">\(2x-m-1\)</span> integers <span
+class="math inline">\(\in (T, m)\)</span> which are not present.</p>
+Thus, for fixed <span class="math inline">\(m\)</span> and <span
+class="math inline">\(x\)</span>, their contribution to the final answer
+is $$
+<span class="math display">\[\begin{aligned}
+&amp;\sum_{T=1}^{m-1}T\binom{T-1}{m - x}\binom{m - 1 - T}{2x-m-1}\\
+= &amp;\sum_{T=1}^{m-1}(m-x+1)\binom{T}{m-x+1}\binom{m-1-T}{2x-m-1}\\
+= &amp;(m-x+1)\binom{m}{x + 1}
+
+\end{aligned}\]</span>
+<p><span class="math display">\[
+where the combinatorial identity
+\]</span> _{k=0}^n = $$ is applied.</p>
+<p><strong>Proof.</strong> <span class="math display">\[
+\begin{aligned}
+&amp;\sum_{k=0}^n \binom{k}{a}\binom{n-k}{b} \\
+=&amp; \sum_{k=0}^n \binom{k}{k-a}\binom{n-k}{b} \\
+=&amp; \sum_{k=0}^n
+(-1)^{k-a}\binom{-a-1}{k-a}(-1)^{n-k-b}\binom{-b-1}{n-k-b} \\
+=&amp; (-1)^{n-a-b}\sum_{k=0}^n \binom{-a-1}{k-a}\binom{-b-1}{n-k-b} \\
+=&amp; (-1)^{n-a-b}\binom{-a-b-2}{n-a-b} \\
+=&amp; \binom{n+1}{n-a-b} \\
+=&amp; \binom{n+1}{a+b+1} \\
+\blacksquare
+\end{aligned}
+\]</span> We can obtain the answer by iterating <span
+class="math inline">\(m\)</span> and <span
+class="math inline">\(x\)</span>, and combining the contributions from
+the two cases.</p>
+<p>The final answer is <span class="math display">\[
+\boxed{\sum_{i=1}^n\left( \sum_{j=0}^{\left\lfloor \frac{i}{2}
+\right\rfloor} (2i-2j+1)\binom{i-1}{j} + \sum_{j=\left\lfloor
+\frac{i}{2} \right\rfloor + 1}^{i-1}(i-j+1)\binom{i}{j+1} \right)}
+\]</span> Time complexity: <span
+class="math inline">\(\Theta(n^2)\)</span> per testcase.</p>
 
       
     </div>
