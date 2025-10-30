@@ -320,7 +320,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-10-29 16:58:21" itemprop="dateModified" datetime="2025-10-29T16:58:21+08:00">2025-10-29</time>
+                <time title="Modified: 2025-10-29 16:59:30" itemprop="dateModified" datetime="2025-10-29T16:59:30+08:00">2025-10-29</time>
               </span>
 
           
@@ -709,7 +709,8 @@ a_p \cdot \min\limits_{i\le k\le j}a_k \ge x \Leftrightarrow
 \min\limits_{i\le k\le j}a_k \ge \color{red}\left\lceil \dfrac{x}{a_p}
 \right\rceil
 \]</span> where the red term is fixed.</p>
-<p>Note that $_{i k j} a_k $ is <strong>non-increasing</strong> as <span
+<p>Note that <span class="math inline">\(\min\limits_{i \le k \le j}
+a_k\)</span> is <strong>non-increasing</strong> as <span
 class="math inline">\(j\)</span> increases. Thus, we perform binary
 search and find the largest such <span class="math inline">\(j\)</span>.
 Then all segments <span class="math inline">\([l, r]\)</span> where
@@ -800,7 +801,7 @@ denotes the range of the elements.</p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-10-29 16:49:25" itemprop="dateModified" datetime="2025-10-29T16:49:25+08:00">2025-10-29</time>
+                <time title="Modified: 2025-10-30 14:47:46" itemprop="dateModified" datetime="2025-10-30T14:47:46+08:00">2025-10-30</time>
               </span>
 
           
@@ -1626,6 +1627,88 @@ the two cases.</p>
 \frac{i}{2} \right\rfloor + 1}^{i-1}(i-j+1)\binom{i}{j+1} \right)}
 \]</span> Time complexity: <span
 class="math inline">\(\Theta(n^2)\)</span> per testcase.</p>
+<h2 id="cf1925d"><a
+target="_blank" rel="noopener" href="https://codeforces.com/contest/1925/problem/D">CF1925D</a></h2>
+<blockquote>
+<p>There are <span class="math inline">\(n\)</span> children in a class,
+<span class="math inline">\(m\)</span> pairs among them are friends. The
+<span class="math inline">\(i\)</span>-th pair who are friends have a
+friendship value of <span class="math inline">\(f_i\)</span>.</p>
+<p>The teacher has to go for <span class="math inline">\(k\)</span>
+excursions, and for each of the excursions she chooses a pair of
+children uniformly at random and independently. If a pair of friends is
+chosen, their friendship value increases by <span
+class="math inline">\(1\)</span> for all subsequent excursions (the
+teacher can choose a pair of children more than once). The friendship
+value of a pair who are not friends is considered <span
+class="math inline">\(0\)</span>, and it does not change for subsequent
+excursions.</p>
+<p>Find the expected value of the sum of friendship values of all <span
+class="math inline">\(k\)</span> pairs chosen for the excursions (at the
+time of being chosen).</p>
+<p><span class="math inline">\(2\le n\le 10^5, 0\le m \le
+\min\left(10^5, \dfrac{n(n-1)}{2}\right), 1 \le k \le
+2\cdot10^5\)</span>.</p>
+</blockquote>
+<p>Since the expected value is linear, we can consider the contribution
+of the initial <span class="math inline">\(f\)</span> and the increments
+respectively.</p>
+<p>For convenience, let <span class="math inline">\(d =
+\binom{n}{2}\)</span>, representing the total pairs.</p>
+<p>Consider the contribution of the initial <span
+class="math inline">\(f\)</span>. Let it be <span
+class="math inline">\(S\)</span>. Define <span class="math display">\[
+I_{i, j} = \left\{\begin{matrix}
+1, &amp; f_i \text{\ is chosen for the }j \text{-th\ time} \\
+0, &amp;\text{otherwise.}
+\end{matrix}\right.
+\]</span> Then the total number of times for which <span
+class="math inline">\(f_i\)</span> is chosen is <span
+class="math display">\[
+X_i = \sum_{j=1}^k I_{i, j}
+\]</span> Therefore, <span class="math display">\[
+S = \sum_{i=1}^m f_i X_i
+\]</span> Take expectations on both sides: <span class="math display">\[
+\begin{aligned}
+\mathbb{E}[S] =&amp; \sum_{i=1}^mf_i\mathbb{E}[X_i] \\
+=&amp; \sum_{i=1}^mf_i\sum_{j=1}^k \mathbb{E}[I_{i, j}]\\
+=&amp; \sum_{i=1}^mf_i\sum_{j=1}^k P(f_i \text{\ is chosen for the }j
+\text{-th\ time})
+\end{aligned}
+\]</span> For arbitrary <span class="math inline">\(i\)</span> and <span
+class="math inline">\(j\)</span>, the probability with which <span
+class="math inline">\(f_i\)</span> is chosen for the <span
+class="math inline">\(j\)</span>-th time is the same, which is <span
+class="math inline">\(\dfrac{1}{d}\)</span>.</p>
+<p>Therefore, <span class="math display">\[
+\mathbb{E}[S] = \dfrac{k}{d}\sum_{i=1}^m f_i
+\]</span> Consider the contribution of the increments. Let it be <span
+class="math inline">\(T\)</span>. We have <span class="math display">\[
+T = \sum_{i=1}^m g(X_i)
+\]</span></p>
+<p>where <span class="math inline">\(g(x) =
+\dfrac{x(x-1)}{2}\)</span>.</p>
+<p>Take expectations on both sides: <span class="math display">\[
+\begin{aligned}
+\mathbb{E}[T] &amp;= \sum_{i=1}^m \mathbb{E}[g(X_i)]\\
+&amp;= \sum_{i=1}^m\sum_{t=0}^k g(t) P(X_i = t) \\
+&amp;=
+\sum_{i=1}^m\sum_{t=0}^kg(t)\binom{k}{t}\left(\dfrac{1}{d}\right)^t\left(\dfrac{d-1}{d}\right)^{k-t}\\
+&amp;=
+m\sum_{t=0}^k\dfrac{t(t-1)}{2}\binom{k}{t}\left(\dfrac{1}{d}\right)^t\left(\dfrac{d-1}{d}\right)^{k-t}
+\end{aligned}
+\]</span> where we use the binomial distribution since each pair is
+chosen independently with probability <span
+class="math inline">\(\dfrac{1}{d}\)</span>.</p>
+<p>Thus, the final answer is <span class="math display">\[
+\begin{aligned}
+&amp;\mathbb{E}[S] + \mathbb{E}[T] \\
+=&amp; \boxed{\dfrac{k}{d}\sum_{i=1}^m f_i +
+m\sum_{t=0}^k\dfrac{t(t-1)}{2}\binom{k}{t}\left(\dfrac{1}{d}\right)^t\left(\dfrac{d-1}{d}\right)^{k-t}}\\
+\blacksquare
+\end{aligned}
+\]</span> Time complexity: <span class="math inline">\(\Theta(m +
+k)\)</span> per testcase.</p>
 
       
     </div>
