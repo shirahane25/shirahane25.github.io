@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Iverson bracket \[ [P] &#x3D; \left\{\begin{matrix} 1, &amp; \textrm{If P is true;} \\ 0, &amp; \textrm{Otherwise.} \end{matrix}\right. \] where \(P\) is a proposition. Mobius inversion $$">
+  <meta name="description" content="CF1749D. Counting Arrays Observe that an arbitrary array \(a\) always has a removal sequence of \([1, 1, \dots, 1]\), for \(\gcd(a_1, 1) &#x3D; 1\) always holds. Therefore, as long as there exists an in">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mobius Inversion">
-<meta property="og:url" content="http://example.com/2025/10/19/Mobius-Inversion/index.html">
+<meta property="og:title" content="Nov CF Grind">
+<meta property="og:url" content="http://example.com/2025/11/05/Nov-CF-Grind/index.html">
 <meta property="og:site_name" content="Shirahane&#39;s Blog">
-<meta property="og:description" content="Iverson bracket \[ [P] &#x3D; \left\{\begin{matrix} 1, &amp; \textrm{If P is true;} \\ 0, &amp; \textrm{Otherwise.} \end{matrix}\right. \] where \(P\) is a proposition. Mobius inversion $$">
+<meta property="og:description" content="CF1749D. Counting Arrays Observe that an arbitrary array \(a\) always has a removal sequence of \([1, 1, \dots, 1]\), for \(\gcd(a_1, 1) &#x3D; 1\) always holds. Therefore, as long as there exists an in">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-19T14:13:04.000Z">
-<meta property="article:modified_time" content="2025-10-19T14:29:32.827Z">
+<meta property="article:published_time" content="2025-11-05T11:55:14.000Z">
+<meta property="article:modified_time" content="2025-11-05T12:35:26.009Z">
 <meta property="article:author" content="Shirahane">
-<meta property="article:tag" content="Algorithm">
+<meta property="article:tag" content="CF Grind">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2025/10/19/Mobius-Inversion/">
+<link rel="canonical" href="http://example.com/2025/11/05/Nov-CF-Grind/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>Mobius Inversion | Shirahane's Blog</title>
+  <title>Nov CF Grind | Shirahane's Blog</title>
   
 
 
@@ -166,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/10/19/Mobius-Inversion/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/05/Nov-CF-Grind/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -179,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Mobius Inversion
+          Nov CF Grind
         </h1>
 
         <div class="post-meta">
@@ -190,7 +190,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-10-19 22:13:04 / Modified: 22:29:32" itemprop="dateCreated datePublished" datetime="2025-10-19T22:13:04+08:00">2025-10-19</time>
+              <time title="Created: 2025-11-05 19:55:14 / Modified: 20:35:26" itemprop="dateCreated datePublished" datetime="2025-11-05T19:55:14+08:00">2025-11-05</time>
             </span>
 
           
@@ -211,17 +211,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="iverson-bracket">Iverson bracket</h2>
-<p><span class="math display">\[
-[P] =
-\left\{\begin{matrix}
-1, &amp; \textrm{If P is true;} \\
-0, &amp; \textrm{Otherwise.}
-\end{matrix}\right.
-\]</span></p>
-<p>where <span class="math inline">\(P\)</span> is a proposition.</p>
-<h2 id="mobius-inversion">Mobius inversion</h2>
-<p>$$</p>
+        <h2 id="cf1749d.-counting-arrays"><a
+target="_blank" rel="noopener" href="https://codeforces.com/contest/1749/problem/D">CF1749D. Counting
+Arrays</a></h2>
+<p>Observe that an arbitrary array <span
+class="math inline">\(a\)</span> always has a removal sequence of <span
+class="math inline">\([1, 1, \dots, 1]\)</span>, for <span
+class="math inline">\(\gcd(a_1, 1) = 1\)</span> always holds. Therefore,
+as long as there exists an index <span class="math inline">\(2 \le i \le
+n, 2\le j \le i, \gcd(a_i, j) = 1\)</span>, we can obtain another
+removal sequence by removing the first element until <span
+class="math inline">\(a_i\)</span> is shifted to position <span
+class="math inline">\(j\)</span>, removing the <span
+class="math inline">\(j\)</span>-th element, and removing the first
+element until every element is removed.</p>
+<p>Thus, the problem reduces to counting the number of arrays of length
+from <span class="math inline">\(1\)</span> to <span
+class="math inline">\(n\)</span>, where each <span
+class="math inline">\(a_i\)</span> is an integer from <span
+class="math inline">\(1\)</span> to <span
+class="math inline">\(m\)</span>, satisfying the aforementioned
+condition.</p>
+<p>Consider each length of <span class="math inline">\(a\)</span>
+separately.</p>
+<p>Assume that the length of <span class="math inline">\(a\)</span> is
+<span class="math inline">\(|a|\)</span>, the number of arrays
+satisfying the condition equals <span
+class="math inline">\(m^{|a|}\)</span> minus the number of arrays <span
+class="math inline">\(a\)</span> such that <span class="math display">\[
+\forall 2\le i\le |a|, 2\le j \le i,\gcd(a_i, j) &gt; 1
+\]</span> Let <span class="math inline">\(T\)</span> denote the number
+of arrays satisfying the condition above. To compute <span
+class="math inline">\(T\)</span>, we consider each <span
+class="math inline">\(a_i\)</span> separately.</p>
+<p>Let <span class="math inline">\(c_i\)</span> be the number of
+integers which <span class="math inline">\(a_i\)</span> can be. It is
+obvious that <span class="math inline">\(c_1 = m\)</span>, because there
+is no constraint on it.</p>
+<p>Since for every <span class="math inline">\(2\le j\le i, \gcd(a_i, j)
+&gt; 1\)</span>, <span class="math inline">\(a_i\)</span> must be a
+multiple of every prime number less than or equal to <span
+class="math inline">\(i\)</span>. Let <span class="math inline">\(d =
+\prod\limits_{2\le p\le i}p\)</span> where <span
+class="math inline">\(p\)</span> is a prime number. We have <span
+class="math inline">\(c_i =
+\left\lfloor\dfrac{m}{d}\right\rfloor\)</span>.</p>
+<p>The condition holds for every <span class="math inline">\(2\le i \le
+|a|\)</span>, so <span class="math inline">\(T =
+\prod\limits_{i=1}^{|a|} c_i\)</span>.</p>
+<p>The answer is the sum of <span class="math inline">\(m^{|a|} -
+T\)</span> over all <span class="math inline">\(1 \le |a| \le
+n\)</span>.</p>
+<p>Time complexity: <span class="math inline">\(\Theta(n \log
+n)\)</span> due to the use of exponentiation by squaring.</p>
 
     </div>
 
@@ -231,7 +273,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+              <a href="/tags/CF-Grind/" rel="tag"># CF Grind</a>
           </div>
 
         
@@ -240,13 +282,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/10/19/Oct-Joint-Contests/" rel="prev" title="Oct Joint Contests">
-      <i class="fa fa-chevron-left"></i> Oct Joint Contests
+    <a href="/2025/10/20/Codeforces-Round-1060-Div-2/" rel="prev" title="Codeforces Round 1060 (Div. 2)">
+      <i class="fa fa-chevron-left"></i> Codeforces Round 1060 (Div. 2)
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/10/20/Codeforces-Round-1060-Div-2/" rel="next" title="Codeforces Round 1060 (Div. 2)">
-      Codeforces Round 1060 (Div. 2) <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -305,7 +344,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#iverson-bracket"><span class="nav-number">1.</span> <span class="nav-text">Iverson bracket</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mobius-inversion"><span class="nav-number">2.</span> <span class="nav-text">Mobius inversion</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cf1749d.-counting-arrays"><span class="nav-number">1.</span> <span class="nav-text">CF1749D. Counting
+Arrays</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
