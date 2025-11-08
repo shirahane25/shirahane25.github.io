@@ -162,6 +162,323 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/08/%E8%AE%A1%E6%95%B0%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Shirahane">
+      <meta itemprop="description" content="Do something cool.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shirahane's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/08/%E8%AE%A1%E6%95%B0%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">计数入门</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-11-08 09:12:59 / Modified: 11:15:23" itemprop="dateCreated datePublished" datetime="2025-11-08T09:12:59+08:00">2025-11-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>注意：本文章还很不完善</strong></p>
+<p><strong>注意：本文章属于个人笔记不是教程</strong></p>
+<h2 id="前置知识">前置知识</h2>
+<h3 id="二项式系数">二项式系数</h3>
+<p>组合意义：在 <span class="math inline">\(n\)</span> 个不同的物品中选
+<span class="math inline">\(m\)</span> 个的方案数。 <span
+class="math display">\[
+\begin{gather*}
+\binom{n}{m} = \dfrac{n!}{m!(n-m)!}\\
+\binom{n}{m} = \binom{n-1}{m} + \binom{n-1}{m-1}
+\end{gather*}
+\]</span></p>
+<h3 id="多重集的排列数-多重组合数">多重集的排列数 / 多重组合数</h3>
+<p><span class="math inline">\(n\)</span> 个物品，<span
+class="math inline">\(m\)</span> 种颜色，每种颜色的物品视作相同，第
+<span class="math inline">\(i\)</span> 种颜色有 <span
+class="math inline">\(a_i\)</span> 个（<span class="math inline">\(\sum
+a_i = n\)</span>），求排列方案数 <span class="math display">\[
+\binom{n}{a_1, a_2,\dots,a_m} = \dfrac{n!}{\prod a_i!}
+\]</span> 发现 <span class="math inline">\(\binom{n}{m} = \binom{n}{m, n
+- m}\)</span>，但没什么用。</p>
+<h3 id="二项式推论-组合恒等式">二项式推论 / 组合恒等式</h3>
+<p>待补</p>
+<h3 id="球盒模型">球盒模型</h3>
+<p>有 <span class="math inline">\(n\)</span> 个球，<span
+class="math inline">\(m\)</span> 个盒子。要将 <span
+class="math inline">\(n\)</span> 个球放入 <span
+class="math inline">\(m\)</span> 个盒子中。</p>
+<p>我们考察：球是否有标号、盒是否有标号、盒是否可空。</p>
+<p>盒是否有标号其实无所谓，把有标号的方案数除以 <span
+class="math inline">\(m!\)</span> 即可。下面只考察盒子
+<strong>有标号</strong> 的情况。</p>
+<h4 id="球无标号盒非空">球无标号，盒非空</h4>
+<p><span class="math inline">\(n\)</span> 个无标号球放入 <span
+class="math inline">\(m\)</span> 个有标号盒子，盒子非空的方案数。</p>
+<p>插板法，把 <span class="math inline">\(n\)</span>
+个球排成一行，相当于把 <span class="math inline">\(m-1\)</span>
+个隔板插入 <span class="math inline">\(n-1\)</span> 个间隙中的方案数。
+<span class="math display">\[
+\binom{n-1}{m-1}
+\]</span> 问题等价于 <span class="math inline">\(x_1 + x_2 + \cdots +
+x_m = n\)</span> 的正整数解的个数。</p>
+<h4 id="球无标号盒可空">球无标号，盒可空</h4>
+<p><span class="math inline">\(n\)</span> 个无标号球放入 <span
+class="math inline">\(m\)</span> 个有标号盒子，盒子可空的方案数。</p>
+<p>问题等价于 <span class="math inline">\(x_1 + x_2 + \cdots + x_m =
+n\)</span> 的非负整数解的个数。</p>
+<p>令 <span class="math inline">\(a_i = x_i + 1\)</span>，问题等价于
+<span class="math inline">\(a_1 + a_2 + \cdots + a_m = n + m\)</span>
+的正整数解的个数。转化为前一个模型，插板法解得 <span
+class="math display">\[
+\binom{n+m-1}{m-1} = \binom{n+m-1}{n}
+\]</span></p>
+<h4 id="球有标号盒可空">球有标号，盒可空</h4>
+<p>每个球都可以选择放入 <span class="math inline">\(m\)</span>
+个盒子中的任意一个，方案数为 <span
+class="math inline">\(m^n\)</span>。</p>
+<h4 id="球有标号盒非空">球有标号，盒非空</h4>
+<p>类似前一个模型，但是要求盒子非空，对着这个限制容斥，即求恰好 <span
+class="math inline">\(0\)</span> 个盒子为空的方案数，钦定 <span
+class="math inline">\(i\)</span>
+个盒子为空，剩下的盒子随意放，二项式反演得 <span class="math display">\[
+\sum_{i=0}^m(-1)^i\binom{m}{i}(m-i)^n
+\]</span></p>
+<h3 id="二项式定理">二项式定理</h3>
+<p><span class="math display">\[
+(a+b)^n = \sum_{i=0}^n\binom{n}{i}a^ib^{n-i}
+\]</span></p>
+<h3 id="容斥原理">容斥原理</h3>
+<p>待补</p>
+<h3 id="二项式反演">二项式反演</h3>
+<p>很好用的反演。</p>
+<p>有两个形式，其中最常用的是这个 <span class="math display">\[
+f(k) = \sum_{i=k}\binom{i}{k}g(i) \Leftrightarrow g(k) =
+\sum_{i=k}(-1)^{i-k}\binom{i}{k}f(i)
+\]</span> 求和上界无所谓，因为一般的问题到了一定规模 <span
+class="math inline">\(f\)</span> 和 <span
+class="math inline">\(g\)</span> 都是 <span
+class="math inline">\(0\)</span>。</p>
+<p>组合意义：设</p>
+<ul>
+<li><span class="math inline">\(g(k)\)</span> 表示恰好选择 <span
+class="math inline">\(k\)</span> 个物品的方案数；</li>
+<li><span class="math inline">\(f(k)\)</span> 表示 <strong>钦定</strong>
+选择 <span class="math inline">\(k\)</span> 个物品的方案数。</li>
+</ul>
+<p>名词解释：钦定 <span class="math inline">\(k\)</span>
+个意味着，我们强制要求这 <span class="math inline">\(k\)</span>
+个物品满足一定要求，剩下的物品放任自流，不管它是否满足要求。即，选了
+<span class="math inline">\(k\)</span> 个物品，然后再算包含这 <span
+class="math inline">\(k\)</span> 个物品的方案数，会重复。</p>
+<p>已知 <span class="math inline">\(g\)</span> 可以方便求 <span
+class="math inline">\(f\)</span>，但大部分问题中，求恰好是比较困难的，但求钦定比较方便，于是可以通过二项式反演已知
+<span class="math inline">\(f\)</span> 求出 <span
+class="math inline">\(g\)</span>。注意到 <span class="math inline">\(k =
+0\)</span> 时形式和普通容斥相同。</p>
+<h2 id="热身题">热身题</h2>
+<h3 id="问题一">问题一</h3>
+<blockquote>
+<p>计数长为 <span class="math inline">\(n\)</span> 的错排个数，<span
+class="math inline">\(n \le 10^6\)</span></p>
+</blockquote>
+<p>即求恰好 <span class="math inline">\(0\)</span> 个位置满足 <span
+class="math inline">\(p_i = i\)</span> 的排列数，钦定 <span
+class="math inline">\(i\)</span>
+个这样的位置，剩下的没有限制可以随意排列，二项式反演可得 <span
+class="math display">\[
+\sum_{i=0}^n(-1)^i\binom{n}{i}(n-i)!
+\]</span></p>
+<h3 id="问题二">问题二</h3>
+<blockquote>
+<p>计算第二类斯特林数 <span class="math inline">\(S(n, m)\)</span>：将
+<span class="math inline">\(n\)</span> 个有标号小球放入 <span
+class="math inline">\(m\)</span>
+个无标号盒子，且每个盒子非空的方案数</p>
+<p><span class="math inline">\(n, m \le 8000\)</span></p>
+</blockquote>
+<p>先给盒子标号，最后除以 <span class="math inline">\(m!\)</span>
+去掉标号。</p>
+<p>如果不要求盒子非空，每个球都有 <span class="math inline">\(m\)</span>
+种选法，即 <span class="math inline">\(m^n\)</span>
+种。现要求盒子非空，对着这个限制容斥，即求恰好 <span
+class="math inline">\(0\)</span> 个盒子为空的方案数，钦定 <span
+class="math inline">\(i\)</span>
+个盒子为空，剩下的盒子随意放，二项式反演得 <span class="math display">\[
+\dfrac{1}{m!}\sum_{i=0}^m(-1)^i\binom{m}{i}(m-i)^n
+\]</span> 当然也可以递推，考察第 <span class="math inline">\(n\)</span>
+个球的放入情况，可以新开一个盒子，也可以放入已有的 <span
+class="math inline">\(m\)</span> 个盒子中的 <span
+class="math inline">\(1\)</span> 个 <span class="math display">\[
+S(n, m) = S(n - 1, m - 1) + mS(n-1,m)
+\]</span> 其中规定：<span class="math inline">\(S(0, 0) = 1, S(n, 0)=
+0(n &gt; 0), S(n, m) = 0(m &gt; n)\)</span></p>
+<h3 id="问题三">问题三</h3>
+<blockquote>
+<p>计数把长为 <span class="math inline">\(n\)</span> 的格子，染恰好
+<span class="math inline">\(m\)</span>
+种颜色，且相邻格子颜色不同的方案数</p>
+<p><span class="math inline">\(n\le 10^9, m\le10^6\)</span></p>
+</blockquote>
+<p><del>其实根据数据范围可以猜出要对着颜色容斥</del></p>
+<p>如果不要求每种颜色都出现一次，答案为 <span
+class="math inline">\(m(m-1)^{n-1}\)</span>。</p>
+<p>对着这个限制容斥，即求恰好 <span class="math inline">\(0\)</span>
+个颜色不出现的方案数，钦定 <span class="math inline">\(i\)</span>
+个颜色不出现，剩下的放入。 <span class="math display">\[
+\sum_{i=0}^m(-1)^i\binom{m}{i}(m-i)(m-1-i)^{n-1}
+\]</span></p>
+<h3 id="问题四">问题四</h3>
+<blockquote>
+<p>计数把 <span class="math inline">\(n \times m\)</span>
+的网格图黑白染色，要求每行每列至少有一个黑色的方案数</p>
+<p><span class="math inline">\(n, m\le 10^6\)</span></p>
+</blockquote>
+<p>即计数恰好 <span class="math inline">\(0\)</span> 行全白，恰好 <span
+class="math inline">\(0\)</span> 列全白的方案数。</p>
+<p>考虑一个暴力容斥，钦定 <span class="math inline">\(i\)</span>
+行全白，<span class="math inline">\(j\)</span>
+列全白，剩下的随便染色，方案数是 <span class="math display">\[
+\sum_{i=0}^n\sum_{j=0}^m(-1)^{i+j}\binom{n}{i}\binom{m}{j}2^{(n-i)(m-j)}
+\]</span> 这是 <span class="math inline">\(\Theta(nm)\)</span>
+的求和，考虑化简这个式子，把和 <span class="math inline">\(j\)</span>
+无关的量都提到外层求和 <span class="math display">\[
+\begin{aligned}
+&amp;\sum_{i=0}^n(-1)^i\binom{n}{i}\sum_{j=0}^{m}(-1)^j\binom{m}{j}2^{(n-i)(m-j)}\\
+=&amp;\sum_{i=0}^n(-1)^i\binom{n}{i}2^{(n-i)m}\sum_{j=0}^{m}(-1)^j\binom{m}{j}2^{-(n-i)j}\\
+=&amp;\sum_{i=0}^n(-1)^i\binom{n}{i}2^{(n-i)m}\sum_{j=0}^{m}(-1)^j\binom{m}{j}\left(2^{-(n-i)}\right)^j\\
+=&amp;\sum_{i=0}^n(-1)^i\binom{n}{i}2^{(n-i)m}\sum_{j=0}^{m}\binom{m}{j}\left(-2^{-(n-i)}\right)^j\\
+=&amp;\sum_{i=0}^n(-1)^i\binom{n}{i}2^{(n-i)m}\left(1-2^{-(n-i)}\right)^m\\
+=&amp;\sum_{i=0}^n(-1)^i\binom{n}{i}\left(2^{n-i}\right)^m\left(1-2^{-(n-i)}\right)^m\\
+=&amp;\boxed{\sum_{i=0}^n(-1)^i\binom{n}{i}\left(2^{n-i} - 1\right)^m}
+\end{aligned}
+\]</span>
+当然也有个更好的思路，我们考虑对着行容斥，先不管每行能否保证至少一个黑，如果要求每列至少一个黑，每列之间是独立的，每一列至少一个黑的方案数是
+<span class="math inline">\(2^n-1\)</span>，那么 <span
+class="math inline">\(m\)</span> 列就是 <span
+class="math inline">\(\left(2^n - 1\right)^m\)</span>。</p>
+<p>现在我们要求恰好 <span class="math inline">\(0\)</span> 行全白，钦定
+<span class="math inline">\(i\)</span>
+行全白，剩下的随便填（但要求每列至少一个黑）然后容斥即可 <span
+class="math display">\[
+\boxed{\sum_{i=0}^n(-1)^i\binom{n}{i}\left(2^{n-i}-1\right)^m}
+\]</span> 得到了相同的式子。</p>
+<h3 id="问题五">问题五</h3>
+<blockquote>
+<p><span class="math inline">\(n\)</span> 个物品，每次有 <span
+class="math inline">\(p_i\)</span> 的概率取第 <span
+class="math inline">\(i\)</span>
+个，求每个物品都至少取了一次的期望时间</p>
+<p><span class="math inline">\(n\le 26,\sum\limits_{i=1}^n p_i =
+1\)</span></p>
+</blockquote>
+<p>我不会这个东西 /ll</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/07/Nov-USACO-Grind/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Shirahane">
+      <meta itemprop="description" content="Do something cool.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shirahane's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/07/Nov-USACO-Grind/" class="post-title-link" itemprop="url">Nov USACO Grind</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-11-07 17:09:30 / Modified: 17:14:31" itemprop="dateCreated datePublished" datetime="2025-11-07T17:09:30+08:00">2025-11-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="usaco24open-the-winning-gene-s"><a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10279">[USACO24OPEN] The
+‘Winning’ Gene S</a></h2>
+<p>We iterate <span class="math inline">\(L\)</span> from <span
+class="math inline">\(1\)</span> to <span
+class="math inline">\(n\)</span> and calculate the answer
+separately.</p>
+<p>Let <span class="math inline">\(S(i, L)\)</span></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/05/Nov-CF-Grind/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1965,14 +2282,14 @@ on.</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
