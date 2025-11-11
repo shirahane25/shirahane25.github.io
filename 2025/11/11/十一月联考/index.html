@@ -28,7 +28,7 @@
 <meta property="og:description" content="NOIP Round 33 Problem A. coprime  对于一个数组 \(a\) 定义 \(\gcd(a)\) 为 \(a\) 中所有元素的 \(\gcd\)。 定义 \(f(n,m) &#x3D; \sum\limits_{\text{valid} a} \gcd^2(a)\)，其中合法的 \(a\) 长为 \(n\)，且每个元素都是 \([1, m]\) 的整数。 给定 \">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-11-11T08:41:43.000Z">
-<meta property="article:modified_time" content="2025-11-11T09:19:16.585Z">
+<meta property="article:modified_time" content="2025-11-11T09:35:12.483Z">
 <meta property="article:author" content="Shirahane">
 <meta property="article:tag" content="联考">
 <meta name="twitter:card" content="summary">
@@ -190,7 +190,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-11-11 16:41:43 / Modified: 17:19:16" itemprop="dateCreated datePublished" datetime="2025-11-11T16:41:43+08:00">2025-11-11</time>
+              <time title="Created: 2025-11-11 16:41:43 / Modified: 17:35:12" itemprop="dateCreated datePublished" datetime="2025-11-11T16:41:43+08:00">2025-11-11</time>
             </span>
 
           
@@ -272,7 +272,7 @@ class="math display">\[
 h(j) = \sum_{i|j}i^2\mu\left(\dfrac{j}{i}\right)
 \]</span></p>
 <p>代回答案 <span class="math display">\[
-f(n,m) &amp;= \sum_{j=1}^mh(j)\left\lfloor\dfrac{m}{j}\right\rfloor^n\\
+f(n,m) = \sum_{j=1}^mh(j)\left\lfloor\dfrac{m}{j}\right\rfloor^n\\
 \]</span>
 如果保留整除形式，不可避免的会出现根号。我们希望不要出现整除，换成一些数论函数的求和，考虑差分，设
 <span class="math display">\[
