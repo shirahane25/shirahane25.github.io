@@ -187,7 +187,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-11-11 16:41:43 / Modified: 17:35:12" itemprop="dateCreated datePublished" datetime="2025-11-11T16:41:43+08:00">2025-11-11</time>
+              <time title="Created: 2025-11-11 16:41:43 / Modified: 20:01:14" itemprop="dateCreated datePublished" datetime="2025-11-11T16:41:43+08:00">2025-11-11</time>
             </span>
 
           
@@ -201,12 +201,220 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="noip-round-33"><a
-target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/contest.php?cid=2336">NOIP
-Round 33</a></h2>
-<h3 id="problem-a.-coprime"><a
+          <h2 id="noip2025-模拟测试赛三十二"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/contest.php?cid=2335">NOIP2025
+模拟测试赛（三十二）</a></h2>
+<h3 id="problem-a.-沙滩-beach"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2335&amp;pid=0">Problem
+A. 沙滩 beach</a></h3>
+<p>简单构造赛时全过了没啥好说的</p>
+<h3 id="problem-b.-望春风-see"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2335&amp;pid=1">Problem
+B. 望春风 see</a></h3>
+<blockquote>
+<p>对于一个正整数集合 <span class="math inline">\(S\)</span>，它的扩展
+<span class="math inline">\(S&#39;\)</span> 通过如下操作得到：</p>
+<ul>
+<li><p>令 <span class="math inline">\(S&#39; = S\)</span>；</p></li>
+<li><p>每次选取 <span class="math inline">\(S&#39;\)</span> 中的一对数
+<span class="math inline">\((x,y)\)</span>，满足 <span
+class="math inline">\(2 | (x + y)\)</span> 且 <span
+class="math inline">\(\dfrac{x+y}{2}\not\in S&#39;\)</span>，将 <span
+class="math inline">\(\dfrac{x+y}{2}\)</span> 加入 <span
+class="math inline">\(S&#39;\)</span>。</p></li>
+</ul>
+<p>给定一个长为 <span class="math inline">\(n\)</span> 的正整数序列
+<span class="math inline">\(a\)</span>，回答 <span
+class="math inline">\(q\)</span> 次询问，每次给定 <span
+class="math inline">\(l, r\)</span>，求出若 <span
+class="math inline">\(S = \{a_i | l\le i\le r\}\)</span>，拓展集合 <span
+class="math inline">\(S&#39;\)</span> 的大小。</p>
+<p><span class="math inline">\(1\le n\le 5\cdot 10^5,1\le q\le
+3\cdot10^6, V \le 10^{18}\)</span>，其中 <span
+class="math inline">\(V\)</span> 是 <span
+class="math inline">\(a\)</span> 的值域。</p>
+</blockquote>
+<p>这种题目最好手玩一下，看看 <span
+class="math inline">\(S&#39;\)</span> 的性质。</p>
+<p>首先判掉 <span class="math inline">\(|S| = 1\)</span>
+的情况。此时答案为 <span class="math inline">\(1\)</span>。</p>
+<p>现在 <span class="math inline">\(|S&#39;| \ge
+2\)</span>，观察性质。</p>
+<p>将 <span class="math inline">\(S&#39;\)</span> 排序。</p>
+<p><strong>观察一：<span class="math inline">\(S&#39;\)</span>
+的最大值最小值不变，等于 <span class="math inline">\(S\)</span>
+的最大值最小值。</strong></p>
+<p>每次取数轴上两点的中点，不会超出原有的点的范围。</p>
+<p><strong>观察二：<span class="math inline">\(S&#39;\)</span>
+是等差数列，且公差 <span class="math inline">\(d \equiv 1\pmod
+2\)</span>。</strong></p>
+<p>设相邻三个数 <span
+class="math inline">\(S&#39;_{i},S&#39;_{i+1},S&#39;_{i+2}\)</span>，记相邻两项的差分别为
+<span class="math inline">\(x, y\)</span>。</p>
+<p>首先有 <span class="math inline">\(x\equiv y\equiv 1 \pmod
+2\)</span>，否则可以再取中点。</p>
+<p>而如果 <span class="math inline">\(x\neq
+y\)</span>，可以操作第一、三项产生 <span
+class="math inline">\(\dfrac{S&#39;_{i} + S&#39;_{i+2}}{2} \neq
+S&#39;_{i+1}\)</span>。</p>
+<p>已知最大值最小值，只需求出公差 <span
+class="math inline">\(d\)</span>，即可求得序列长度。</p>
+<p><strong>结论：设 <span class="math inline">\(g\)</span> 为 <span
+class="math inline">\(S\)</span> 差分数组的 <span
+class="math inline">\(\gcd\)</span>，则 <span class="math inline">\(d =
+\dfrac{g}{\text{lowbit}(g)}\)</span></strong>。</p>
+<p><span class="math inline">\(S\)</span> 的每个元素都是最小值加上若干倍
+<span class="math inline">\(d\)</span>，所以 <span
+class="math inline">\(d\)</span> 肯定是每个差分值的因数，也就是差分的
+<span class="math inline">\(\gcd\)</span> 的因数。而根据观察二，需要把
+<span class="math inline">\(g\)</span> 的所有 <span
+class="math inline">\(2\)</span> 因子全部去除。</p>
+<p>然后还有经典结论：任意重排数组，差分数组的 <span
+class="math inline">\(\gcd\)</span> 不变。</p>
+<blockquote>
+<p>考察 <span class="math inline">\(3\)</span> 个数 <span
+class="math inline">\(a &lt; b &lt; c\)</span>，推广是容易的。 <span
+class="math display">\[
+\gcd(b - a, c - b) = \gcd(c-a,b-a)=\gcd(c-a,c-b) = \gcd(a-b,c-b)
+\]</span></p>
+</blockquote>
+<p>于是无需排序，只需维护原序列 <span class="math inline">\(a\)</span>
+的差分数组的区间 <span class="math inline">\(\gcd,\max,\min\)</span>
+即可。</p>
+<p><span class="math inline">\(\Theta((q+n)\log V)\)</span>。</p>
+<p><a
+target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2006/C">考察了相似结论的题目</a>。</p>
+<h3 id="problem-c.-是是非非-yes"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2335&amp;pid=2">Problem
+C. 是是非非 yes</a></h3>
+<blockquote>
+<p>给定一棵 <span class="math inline">\(n\)</span> 个节点的树，用 <span
+class="math inline">\(m\)</span>
+种颜色给每个节点染色，称一种染色方案合法当且仅当任意相邻节点的颜色不同。</p>
+<p>给定 <span class="math inline">\(X\)</span> 个关键点 <span
+class="math inline">\(a_1, a_2,\dots,
+a_X\)</span>。对于一种合法的染色方案 <span class="math inline">\(c_1,
+c_2,\dots,c_n\)</span>，定义 <span class="math display">\[
+Z(c) = |\{c_{a_i} | 1\le i \le X\}|
+\]</span> 求出所有合法染色方案的 <span
+class="math inline">\(Z^k(c)\)</span> 之和。对 <span
+class="math inline">\(998244353\)</span> 取模。</p>
+<p><span class="math inline">\(1\le n, m\le 10^5, 1\le k\le
+400\)</span>.</p>
+</blockquote>
+<p>非常好的计数。</p>
+<p>设 <span class="math inline">\(F(x)\)</span> 表示 <span
+class="math inline">\(Z(c) = x\)</span> 的合法染色方案 <span
+class="math inline">\(c\)</span> 的个数。那么答案可以写成 <span
+class="math display">\[
+\sum_{x=0}^m F(x)x^k
+\]</span> 这个 <span class="math inline">\(x^k\)</span>
+没有什么很好的性质，但是有恒等式 <span class="math display">\[
+x^k = \sum_{j=0}^k\begin{Bmatrix}k\\j\end{Bmatrix}j!\binom{x}{j}
+\]</span> 这个式子可以从组合意义角度证明。</p>
+<blockquote>
+<p>有 <span class="math inline">\(x\)</span> 个不同的物品，有 <span
+class="math inline">\(k\)</span> 个位置（标号），可以重复地往这 <span
+class="math inline">\(k\)</span> 个位置放物品的方案数是 <span
+class="math inline">\(x^k\)</span>。</p>
+<p>还可以这样计数，枚举至少出现一次的物品数量 <span
+class="math inline">\(j\)</span>，选出 <span
+class="math inline">\(j\)</span> 个，乘上 <span
+class="math inline">\(\binom{x}{j}\)</span>。</p>
+<p>然后把 <span class="math inline">\(k\)</span> 个位置非空地分配给
+<span class="math inline">\(j\)</span> 种物品，乘上第二类斯特林数 <span
+class="math inline">\(\begin{Bmatrix}k\\j\end{Bmatrix}\)</span>，但斯特林数计数的是无标号集合，所以还要排列，乘上
+<span class="math inline">\(j!\)</span>。</p>
+</blockquote>
+<p>代回原式 <span class="math display">\[
+\begin{aligned}
+&amp;\sum_{x=0}^m F(x)x^k\\
+=&amp;\sum_{x=0}^mF(x)\sum_{j=0}^k\begin{Bmatrix}k\\j\end{Bmatrix}j!\binom{x}{j}\\
+=&amp;\sum_{j=0}^k\begin{Bmatrix}k\\j\end{Bmatrix}j!\color{red}{\sum_{x=0}^m
+F(x)\binom{x}{j}}
+\end{aligned}
+\]</span> 令红色部分为关于 <span class="math inline">\(j\)</span> 的函数
+<span class="math inline">\(T(j)\)</span>。</p>
+<p>考察 <span class="math inline">\(T(j)\)</span> 的组合意义。</p>
+<p>回顾 <span class="math inline">\(F(x)\)</span> 的定义：<span
+class="math inline">\(Z(c) = x\)</span> 的合法染色方案 <span
+class="math inline">\(c\)</span> 的个数。</p>
+<p>乘上 <span
+class="math inline">\(\binom{x}{j}\)</span>，也就是从关键点集合已有的颜色中选出
+<span class="math inline">\(j\)</span> 个颜色的方案数。</p>
+<p>所以 <span class="math inline">\(T(j)\)</span>
+的组合意义是：合法的染色方案数，使得 <span
+class="math inline">\(j\)</span>
+个颜色都至少在某些关键点出现了一次。</p>
+<p>我们不关心具体是哪 <span class="math inline">\(j\)</span>
+个颜色，所以先除掉一个组合数。 <span class="math display">\[
+T(j) = \binom{m}{j}A(j)
+\]</span> 现在可以把颜色分成两类：选定的 <span
+class="math inline">\(j\)</span> 个颜色，我称之为第一类颜色；和没选定的
+<span class="math inline">\(m-j\)</span>
+个颜色，我称之为第二类颜色。</p>
+<p>其中 <span class="math inline">\(A(j)\)</span>
+表示：合法染色方案数，使得每个第一类颜色都至少在某些关键点出现了一次的方案数。</p>
+<p>套路地容斥，计数合法染色方案数，使得恰好 <span
+class="math inline">\(0\)</span> 个第一类颜色未在任何关键点出现。 <span
+class="math display">\[
+A(j) = \sum_{i=0}^j(-1)^i\binom{j}{i}h(i)
+\]</span> 其中 <span class="math inline">\(h(i)\)</span>
+表示合法的染色方案数，使得 <span class="math inline">\(i\)</span>
+个第一类颜色均不在任何关键点出现的方案数。</p>
+<p>为了求出 <span class="math inline">\(h(i)\)</span>，考虑树形
+DP。设</p>
+<ul>
+<li><span class="math inline">\(f_{u,0}\)</span> 表示节点 <span
+class="math inline">\(u\)</span> 放了某个第一类颜色的方案数。</li>
+<li><span class="math inline">\(f_{u, 1}\)</span> 表示节点 <span
+class="math inline">\(u\)</span> 放了某个第二类颜色的方案数。</li>
+</ul>
+<p>注意状态的定义，我们还没有确定具体是哪个颜色（还没标号）。</p>
+<p>考虑转移，先考虑 <span class="math inline">\(u\)</span>
+放某个第二类颜色，这对 <span class="math inline">\(u\)</span>
+是否是关键点没有限制。</p>
+<p>考察 <span class="math inline">\(u\)</span> 的每个儿子 <span
+class="math inline">\(v\)</span>，如果 <span
+class="math inline">\(v\)</span>
+放第一类颜色，随便哪个都可以，乘上标号，方案数 <span
+class="math inline">\(if_{v,0}\cdot\)</span>。</p>
+<p>如果 <span class="math inline">\(v\)</span> 放第二类颜色，不能放和
+<span class="math inline">\(u\)</span>
+一样的，会少一个，乘上标号，方案数 <span
+class="math inline">\((m-1-i)f_{v, 1}\)</span>。</p>
+<p>发现每个儿子之间互不影响，所以全部乘起来 <span
+class="math display">\[
+f_{u, 1} = \prod_{v\in \text{child}(u)}\left(if_{v, 0} +
+(m-1-i)f_{v,1}\right)
+\]</span> 现在考虑 <span class="math inline">\(u\)</span>
+放第第一类颜色。如果 <span class="math inline">\(u\)</span>
+是关键点，它不能放第一类颜色，<span class="math inline">\(f_{u, 0} =
+0\)</span>。</p>
+<p>否则，类似地，考察 <span class="math inline">\(u\)</span> 的每个儿子
+<span class="math inline">\(v\)</span>。如果 <span
+class="math inline">\(v\)</span> 放第一类颜色，不能和 <span
+class="math inline">\(u\)</span> 一样，会少一种，乘上标号，方案数 <span
+class="math inline">\((i-1)f_{v,0}\)</span>。</p>
+<p>如果 <span class="math inline">\(v\)</span>
+放第二类颜色，随便哪个都可以，乘上标号，方案数 <span
+class="math inline">\((m-i)f_{v,1}\)</span>。</p>
+<p>每个儿子之间互不影响，全部乘起来 <span class="math display">\[
+f_{u,0} = \prod_{v\in\text{child}(u)}((i-1)f_{v,0}+(m-i)f_{v, 1})
+\]</span> 不妨设根为 <span class="math inline">\(1\)</span>，最终 <span
+class="math display">\[
+h(i) = if_{1,0}+(m-i)f_{1,1}
+\]</span> 全部往回代即可求出答案。</p>
+<p>答案 <span class="math display">\[
+\sum_{j=0}^k\begin{Bmatrix}k\\j\end{Bmatrix}j!\binom{m}{j}\sum_{i=0}^j(-1)^i\binom{j}{i}h(i)
+\]</span> 时间复杂度 <span class="math inline">\(\Theta(kn +
+k^2)\)</span>。</p>
+<h2 id="noip2025-模拟测试赛三十三"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/contest.php?cid=2336">NOIP2025
+模拟测试赛（三十三）</a></h2>
+<h3 id="problem-a.-前缀和与差分-coprime"><a
 target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2336&amp;pid=0">Problem
-A. coprime</a></h3>
+A. 前缀和与差分 coprime</a></h3>
 <blockquote>
 <p>对于一个数组 <span class="math inline">\(a\)</span> 定义 <span
 class="math inline">\(\gcd(a)\)</span> 为 <span
