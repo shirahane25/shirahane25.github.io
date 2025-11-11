@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="CF1749D. Counting Arrays Observe that an arbitrary array \(a\) always has a removal sequence of \([1, 1, \dots, 1]\), for \(\gcd(a_1, 1) &#x3D; 1\) always holds. Therefore, as long as there exists an in">
+  <meta name="description" content="NOIP Round 33 Problem A. coprime  对于一个数组 \(a\) 定义 \(\gcd(a)\) 为 \(a\) 中所有元素的 \(\gcd\)。 定义 \(f(n,m) &#x3D; \sum\limits_{\text{valid} a} \gcd^2(a)\)，其中合法的 \(a\) 长为 \(n\)，且每个元素都是 \([1, m]\) 的整数。 给定 \">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nov CF Grind">
-<meta property="og:url" content="http://example.com/2025/11/05/Nov-CF-Grind/index.html">
+<meta property="og:title" content="十一月联考">
+<meta property="og:url" content="http://example.com/2025/11/11/%E5%8D%81%E4%B8%80%E6%9C%88%E8%81%94%E8%80%83/index.html">
 <meta property="og:site_name" content="Shirahane&#39;s Blog">
-<meta property="og:description" content="CF1749D. Counting Arrays Observe that an arbitrary array \(a\) always has a removal sequence of \([1, 1, \dots, 1]\), for \(\gcd(a_1, 1) &#x3D; 1\) always holds. Therefore, as long as there exists an in">
+<meta property="og:description" content="NOIP Round 33 Problem A. coprime  对于一个数组 \(a\) 定义 \(\gcd(a)\) 为 \(a\) 中所有元素的 \(\gcd\)。 定义 \(f(n,m) &#x3D; \sum\limits_{\text{valid} a} \gcd^2(a)\)，其中合法的 \(a\) 长为 \(n\)，且每个元素都是 \([1, m]\) 的整数。 给定 \">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-11-05T11:55:14.000Z">
-<meta property="article:modified_time" content="2025-11-05T12:35:26.009Z">
+<meta property="article:published_time" content="2025-11-11T08:41:43.000Z">
+<meta property="article:modified_time" content="2025-11-11T09:19:16.585Z">
 <meta property="article:author" content="Shirahane">
-<meta property="article:tag" content="CF Grind">
+<meta property="article:tag" content="联考">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2025/11/05/Nov-CF-Grind/">
+<link rel="canonical" href="http://example.com/2025/11/11/%E5%8D%81%E4%B8%80%E6%9C%88%E8%81%94%E8%80%83/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>Nov CF Grind | Shirahane's Blog</title>
+  <title>十一月联考 | Shirahane's Blog</title>
   
 
 
@@ -166,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/05/Nov-CF-Grind/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/11/%E5%8D%81%E4%B8%80%E6%9C%88%E8%81%94%E8%80%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -179,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Nov CF Grind
+          十一月联考
         </h1>
 
         <div class="post-meta">
@@ -190,7 +190,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-11-05 19:55:14 / Modified: 20:35:26" itemprop="dateCreated datePublished" datetime="2025-11-05T19:55:14+08:00">2025-11-05</time>
+              <time title="Created: 2025-11-11 16:41:43 / Modified: 17:19:16" itemprop="dateCreated datePublished" datetime="2025-11-11T16:41:43+08:00">2025-11-11</time>
             </span>
 
           
@@ -211,59 +211,90 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="cf1749d.-counting-arrays"><a
-target="_blank" rel="noopener" href="https://codeforces.com/contest/1749/problem/D">CF1749D. Counting
-Arrays</a></h2>
-<p>Observe that an arbitrary array <span
-class="math inline">\(a\)</span> always has a removal sequence of <span
-class="math inline">\([1, 1, \dots, 1]\)</span>, for <span
-class="math inline">\(\gcd(a_1, 1) = 1\)</span> always holds. Therefore,
-as long as there exists an index <span class="math inline">\(2 \le i \le
-n, 2\le j \le i, \gcd(a_i, j) = 1\)</span>, we can obtain another
-removal sequence by removing the first element until <span
-class="math inline">\(a_i\)</span> is shifted to position <span
-class="math inline">\(j\)</span>, removing the <span
-class="math inline">\(j\)</span>-th element, and removing the first
-element until every element is removed.</p>
-<p>Thus, the problem reduces to counting the number of arrays of length
-from <span class="math inline">\(1\)</span> to <span
-class="math inline">\(n\)</span>, where each <span
-class="math inline">\(a_i\)</span> is an integer from <span
-class="math inline">\(1\)</span> to <span
-class="math inline">\(m\)</span>, satisfying the aforementioned
-condition.</p>
-<p>Consider each length of <span class="math inline">\(a\)</span>
-separately.</p>
-<p>Assume that the length of <span class="math inline">\(a\)</span> is
-<span class="math inline">\(|a|\)</span>, the number of arrays
-satisfying the condition equals <span
-class="math inline">\(m^{|a|}\)</span> minus the number of arrays <span
-class="math inline">\(a\)</span> such that <span class="math display">\[
-\forall 2\le i\le |a|, 2\le j \le i,\gcd(a_i, j) &gt; 1
-\]</span> Let <span class="math inline">\(T\)</span> denote the number
-of arrays satisfying the condition above. To compute <span
-class="math inline">\(T\)</span>, we consider each <span
-class="math inline">\(a_i\)</span> separately.</p>
-<p>Let <span class="math inline">\(c_i\)</span> be the number of
-integers which <span class="math inline">\(a_i\)</span> can be. It is
-obvious that <span class="math inline">\(c_1 = m\)</span>, because there
-is no constraint on it.</p>
-<p>Since for every <span class="math inline">\(2\le j\le i, \gcd(a_i, j)
-&gt; 1\)</span>, <span class="math inline">\(a_i\)</span> must be a
-multiple of every prime number less than or equal to <span
-class="math inline">\(i\)</span>. Let <span class="math inline">\(d =
-\prod\limits_{2\le p\le i}p\)</span> where <span
-class="math inline">\(p\)</span> is a prime number. We have <span
-class="math inline">\(c_i =
-\left\lfloor\dfrac{m}{d}\right\rfloor\)</span>.</p>
-<p>The condition holds for every <span class="math inline">\(2\le i \le
-|a|\)</span>, so <span class="math inline">\(T =
-\prod\limits_{i=1}^{|a|} c_i\)</span>.</p>
-<p>The answer is the sum of <span class="math inline">\(m^{|a|} -
-T\)</span> over all <span class="math inline">\(1 \le |a| \le
-n\)</span>.</p>
-<p>Time complexity: <span class="math inline">\(\Theta(n \log
-n)\)</span> due to the use of exponentiation by squaring.</p>
+        <h2 id="noip-round-33"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/contest.php?cid=2336">NOIP
+Round 33</a></h2>
+<h3 id="problem-a.-coprime"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2336&amp;pid=0">Problem
+A. coprime</a></h3>
+<blockquote>
+<p>对于一个数组 <span class="math inline">\(a\)</span> 定义 <span
+class="math inline">\(\gcd(a)\)</span> 为 <span
+class="math inline">\(a\)</span> 中所有元素的 <span
+class="math inline">\(\gcd\)</span>。</p>
+<p>定义 <span class="math inline">\(f(n,m) = \sum\limits_{\text{valid}
+a} \gcd^2(a)\)</span>，其中合法的 <span class="math inline">\(a\)</span>
+长为 <span class="math inline">\(n\)</span>，且每个元素都是 <span
+class="math inline">\([1, m]\)</span> 的整数。</p>
+<p>给定 <span class="math inline">\(n, m\)</span>，对所有 <span
+class="math inline">\(1\le i\le m\)</span> 求出 <span
+class="math inline">\(f(n,i)\)</span>。</p>
+<p>最后输出 <span class="math display">\[
+\sum_{i=1}^m p^{m-i}(f(n,i)\bmod p)
+\]</span> 对 <span class="math inline">\(10^9 +7\)</span>
+取模的结果。其中 <span class="math inline">\(p =
+998244353\)</span>。</p>
+<p><span class="math inline">\(1\le n, m\le 2\cdot 10^7\)</span>。</p>
+</blockquote>
+<p>考虑求出 <span class="math inline">\(f(n, m)\)</span>。</p>
+<p>枚举 <span class="math inline">\(\gcd = i\)</span>，记 <span
+class="math inline">\(A(i)\)</span> 为合法的数组数量，满足 <span
+class="math inline">\(\gcd = i\)</span>。那么答案为 <span
+class="math display">\[
+f(n, m) = \sum_{i=1}^m i^2 A(i)
+\]</span> 求出 <span class="math inline">\(A(i)\)</span>
+比较困难。容斥。设 <span class="math inline">\(B(i)\)</span>
+为合法的数组数量，满足每个数都被 <span class="math inline">\(i\)</span>
+整除。有 <span class="math display">\[
+B(i) = \sum_{i|j} A(j) \Leftrightarrow A(i) =
+\sum_{i|j}\mu\left(\dfrac{j}{i}\right)B(j)
+\]</span> 而 <span class="math inline">\(B(j)\)</span> 是好求的 <span
+class="math display">\[
+B(j) = \left\lfloor\dfrac{m}{j}\right\rfloor^n
+\]</span> 于是 <span class="math display">\[
+A(i) =
+\sum_{i|j}\mu\left(\dfrac{j}{i}\right)\left\lfloor\dfrac{m}{j}\right\rfloor^n
+\]</span> 代回答案的式子 <span class="math display">\[
+f(n, m) = \sum_{i=1}^m
+i^2\sum_{i|j}\mu\left(\dfrac{j}{i}\right)\left\lfloor\dfrac{m}{j}\right\rfloor^n
+\]</span> 交换求和顺序 <span class="math display">\[
+f(n, m) =
+\sum_{j=1}^m\left\lfloor\dfrac{m}{j}\right\rfloor^n\sum_{i|j}i^2\mu\left(\dfrac{j}{i}\right)
+\]</span> 后面那坨是积性函数，可以线性筛 <span
+class="math inline">\(\Theta(m)\)</span> 预处理出来，数论分块，可以做到
+<span class="math inline">\(\Theta(\sqrt m\log n)\)</span>
+求值，这是单个 <span class="math inline">\(f(n,
+m)\)</span>，于是总复杂度 <span class="math inline">\(\Theta(m\sqrt
+m\log n)\)</span>，无法通过。</p>
+<p>之后的步骤比较智慧。</p>
+<p>令后面那个积性函数为 <span class="math inline">\(h\)</span>： <span
+class="math display">\[
+h(j) = \sum_{i|j}i^2\mu\left(\dfrac{j}{i}\right)
+\]</span></p>
+<p>代回答案 <span class="math display">\[
+f(n,m) &amp;= \sum_{j=1}^mh(j)\left\lfloor\dfrac{m}{j}\right\rfloor^n\\
+\]</span>
+如果保留整除形式，不可避免的会出现根号。我们希望不要出现整除，换成一些数论函数的求和，考虑差分，设
+<span class="math display">\[
+g(x) = x^n - (x-1)^n
+\]</span> 写成前缀和形式 <span class="math display">\[
+\begin{aligned}
+f(n,m) &amp;= \sum_{j=1}^mh(j)\left\lfloor\dfrac{m}{j}\right\rfloor^n\\
+&amp;=\sum_{j=1}^mh(j)\sum_{i=1}^{\left\lfloor\frac{m}{j}\right\rfloor}g(i)\\
+&amp;=\sum_{j=1}^mh(j)\sum_{ij\le m} g(i)\\
+&amp;=\sum_{ij\le m} h(j)g(i)\\
+&amp;= \sum_{i=1}^m\sum_{d|i}h(i)g\left(\dfrac{i}{d}\right)\\
+&amp;= \sum_{i=1}^m (h * g)(i)
+\end{aligned}
+\]</span> 也即 <span class="math inline">\(f(n, m)\)</span> 等于 <span
+class="math inline">\(h * g\)</span> 的前 <span
+class="math inline">\(m\)</span> 项和。只需求出 <span
+class="math inline">\(h * g\)</span>，做前缀和即可做到单次查询 <span
+class="math inline">\(\Theta(1)\)</span>。</p>
+<p>直接卷是 <span class="math inline">\(\Theta(m\ln m)\)</span>
+的，但因为 <span class="math inline">\(h\)</span> 是积性函数，<a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/HaHeHyt/p/17185823.html#-%E4%B8%BA%E7%A7%AF%E6%80%A7%E5%BF%AB%E9%80%9F%E7%8B%84%E5%88%A9%E5%85%8B%E9%9B%B7%E5%8D%B7%E7%A7%AF-">这个卷积可以做到
+<span class="math inline">\(\Theta(m\log\log m)\)</span></a>。</p>
 
     </div>
 
@@ -273,7 +304,7 @@ n)\)</span> due to the use of exponentiation by squaring.</p>
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/CF-Grind/" rel="tag"># CF Grind</a>
+              <a href="/tags/%E8%81%94%E8%80%83/" rel="tag"># 联考</a>
           </div>
 
         
@@ -282,13 +313,10 @@ n)\)</span> due to the use of exponentiation by squaring.</p>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/10/20/Codeforces-Round-1060-Div-2/" rel="prev" title="Codeforces Round 1060 (Div. 2)">
-      <i class="fa fa-chevron-left"></i> Codeforces Round 1060 (Div. 2)
+    <a href="/2025/11/08/%E8%AE%A1%E6%95%B0%E5%85%A5%E9%97%A8/" rel="prev" title="计数入门">
+      <i class="fa fa-chevron-left"></i> 计数入门
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/11/07/Nov-USACO-Grind/" rel="next" title="Nov USACO Grind">
-      Nov USACO Grind <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -347,8 +375,9 @@ n)\)</span> due to the use of exponentiation by squaring.</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cf1749d.-counting-arrays"><span class="nav-number">1.</span> <span class="nav-text">CF1749D. Counting
-Arrays</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#noip-round-33"><span class="nav-number">1.</span> <span class="nav-text">NOIP
+Round 33</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-a.-coprime"><span class="nav-number">1.1.</span> <span class="nav-text">Problem
+A. coprime</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

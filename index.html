@@ -162,6 +162,148 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/11/%E5%8D%81%E4%B8%80%E6%9C%88%E8%81%94%E8%80%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Shirahane">
+      <meta itemprop="description" content="Do something cool.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shirahane's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/11/%E5%8D%81%E4%B8%80%E6%9C%88%E8%81%94%E8%80%83/" class="post-title-link" itemprop="url">十一月联考</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-11-11 16:41:43 / Modified: 17:19:16" itemprop="dateCreated datePublished" datetime="2025-11-11T16:41:43+08:00">2025-11-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="noip-round-33"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/contest.php?cid=2336">NOIP
+Round 33</a></h2>
+<h3 id="problem-a.-coprime"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2336&amp;pid=0">Problem
+A. coprime</a></h3>
+<blockquote>
+<p>对于一个数组 <span class="math inline">\(a\)</span> 定义 <span
+class="math inline">\(\gcd(a)\)</span> 为 <span
+class="math inline">\(a\)</span> 中所有元素的 <span
+class="math inline">\(\gcd\)</span>。</p>
+<p>定义 <span class="math inline">\(f(n,m) = \sum\limits_{\text{valid}
+a} \gcd^2(a)\)</span>，其中合法的 <span class="math inline">\(a\)</span>
+长为 <span class="math inline">\(n\)</span>，且每个元素都是 <span
+class="math inline">\([1, m]\)</span> 的整数。</p>
+<p>给定 <span class="math inline">\(n, m\)</span>，对所有 <span
+class="math inline">\(1\le i\le m\)</span> 求出 <span
+class="math inline">\(f(n,i)\)</span>。</p>
+<p>最后输出 <span class="math display">\[
+\sum_{i=1}^m p^{m-i}(f(n,i)\bmod p)
+\]</span> 对 <span class="math inline">\(10^9 +7\)</span>
+取模的结果。其中 <span class="math inline">\(p =
+998244353\)</span>。</p>
+<p><span class="math inline">\(1\le n, m\le 2\cdot 10^7\)</span>。</p>
+</blockquote>
+<p>考虑求出 <span class="math inline">\(f(n, m)\)</span>。</p>
+<p>枚举 <span class="math inline">\(\gcd = i\)</span>，记 <span
+class="math inline">\(A(i)\)</span> 为合法的数组数量，满足 <span
+class="math inline">\(\gcd = i\)</span>。那么答案为 <span
+class="math display">\[
+f(n, m) = \sum_{i=1}^m i^2 A(i)
+\]</span> 求出 <span class="math inline">\(A(i)\)</span>
+比较困难。容斥。设 <span class="math inline">\(B(i)\)</span>
+为合法的数组数量，满足每个数都被 <span class="math inline">\(i\)</span>
+整除。有 <span class="math display">\[
+B(i) = \sum_{i|j} A(j) \Leftrightarrow A(i) =
+\sum_{i|j}\mu\left(\dfrac{j}{i}\right)B(j)
+\]</span> 而 <span class="math inline">\(B(j)\)</span> 是好求的 <span
+class="math display">\[
+B(j) = \left\lfloor\dfrac{m}{j}\right\rfloor^n
+\]</span> 于是 <span class="math display">\[
+A(i) =
+\sum_{i|j}\mu\left(\dfrac{j}{i}\right)\left\lfloor\dfrac{m}{j}\right\rfloor^n
+\]</span> 代回答案的式子 <span class="math display">\[
+f(n, m) = \sum_{i=1}^m
+i^2\sum_{i|j}\mu\left(\dfrac{j}{i}\right)\left\lfloor\dfrac{m}{j}\right\rfloor^n
+\]</span> 交换求和顺序 <span class="math display">\[
+f(n, m) =
+\sum_{j=1}^m\left\lfloor\dfrac{m}{j}\right\rfloor^n\sum_{i|j}i^2\mu\left(\dfrac{j}{i}\right)
+\]</span> 后面那坨是积性函数，可以线性筛 <span
+class="math inline">\(\Theta(m)\)</span> 预处理出来，数论分块，可以做到
+<span class="math inline">\(\Theta(\sqrt m\log n)\)</span>
+求值，这是单个 <span class="math inline">\(f(n,
+m)\)</span>，于是总复杂度 <span class="math inline">\(\Theta(m\sqrt
+m\log n)\)</span>，无法通过。</p>
+<p>之后的步骤比较智慧。</p>
+<p>令后面那个积性函数为 <span class="math inline">\(h\)</span>： <span
+class="math display">\[
+h(j) = \sum_{i|j}i^2\mu\left(\dfrac{j}{i}\right)
+\]</span></p>
+<p>代回答案 <span class="math display">\[
+f(n,m) &amp;= \sum_{j=1}^mh(j)\left\lfloor\dfrac{m}{j}\right\rfloor^n\\
+\]</span>
+如果保留整除形式，不可避免的会出现根号。我们希望不要出现整除，换成一些数论函数的求和，考虑差分，设
+<span class="math display">\[
+g(x) = x^n - (x-1)^n
+\]</span> 写成前缀和形式 <span class="math display">\[
+\begin{aligned}
+f(n,m) &amp;= \sum_{j=1}^mh(j)\left\lfloor\dfrac{m}{j}\right\rfloor^n\\
+&amp;=\sum_{j=1}^mh(j)\sum_{i=1}^{\left\lfloor\frac{m}{j}\right\rfloor}g(i)\\
+&amp;=\sum_{j=1}^mh(j)\sum_{ij\le m} g(i)\\
+&amp;=\sum_{ij\le m} h(j)g(i)\\
+&amp;= \sum_{i=1}^m\sum_{d|i}h(i)g\left(\dfrac{i}{d}\right)\\
+&amp;= \sum_{i=1}^m (h * g)(i)
+\end{aligned}
+\]</span> 也即 <span class="math inline">\(f(n, m)\)</span> 等于 <span
+class="math inline">\(h * g\)</span> 的前 <span
+class="math inline">\(m\)</span> 项和。只需求出 <span
+class="math inline">\(h * g\)</span>，做前缀和即可做到单次查询 <span
+class="math inline">\(\Theta(1)\)</span>。</p>
+<p>直接卷是 <span class="math inline">\(\Theta(m\ln m)\)</span>
+的，但因为 <span class="math inline">\(h\)</span> 是积性函数，<a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/HaHeHyt/p/17185823.html#-%E4%B8%BA%E7%A7%AF%E6%80%A7%E5%BF%AB%E9%80%9F%E7%8B%84%E5%88%A9%E5%85%8B%E9%9B%B7%E5%8D%B7%E7%A7%AF-">这个卷积可以做到
+<span class="math inline">\(\Theta(m\log\log m)\)</span></a>。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/08/%E8%AE%A1%E6%95%B0%E5%85%A5%E9%97%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2282,14 +2424,14 @@ on.</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
