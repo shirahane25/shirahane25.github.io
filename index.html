@@ -335,7 +335,7 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/HaHeHyt/p/17185823.
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-11-11 17:36:45" itemprop="dateModified" datetime="2025-11-11T17:36:45+08:00">2025-11-11</time>
+                <time title="Modified: 2025-11-11 19:30:31" itemprop="dateModified" datetime="2025-11-11T19:30:31+08:00">2025-11-11</time>
               </span>
 
           
@@ -603,8 +603,126 @@ class="math display">\[
 target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2335&amp;pid=2">联考
 是是非非</a></h3>
 <blockquote>
-
+<p>给定一棵 <span class="math inline">\(n\)</span> 个节点的树，用 <span
+class="math inline">\(m\)</span>
+种颜色给每个节点染色，称一种染色方案合法当且仅当任意相邻节点的颜色不同。</p>
+<p>给定 <span class="math inline">\(X\)</span> 个关键点 <span
+class="math inline">\(a_1, a_2,\dots,
+a_X\)</span>。对于一种合法的染色方案 <span class="math inline">\(c_1,
+c_2,\dots,c_n\)</span>，定义 <span class="math display">\[
+Z(c) = |\{c_{a_i} | 1\le i \le X\}|
+\]</span> 求出所有合法染色方案的 <span
+class="math inline">\(Z^k(c)\)</span> 之和。对 <span
+class="math inline">\(998244353\)</span> 取模。</p>
+<p><span class="math inline">\(1\le n, m\le 10^5, 1\le k\le
+400\)</span>.</p>
 </blockquote>
+<p>设 <span class="math inline">\(F(x)\)</span> 表示 <span
+class="math inline">\(Z(c) = x\)</span> 的合法染色方案 <span
+class="math inline">\(c\)</span> 的个数。那么答案可以写成 <span
+class="math display">\[
+\sum_{x=0}^m F(x)x^k
+\]</span> 这个 <span class="math inline">\(x^k\)</span>
+没有什么很好的性质，但是有恒等式 <span class="math display">\[
+x^k = \sum_{j=0}^k\begin{Bmatrix}k\\j\end{Bmatrix}j!\binom{x}{j}
+\]</span> 这个式子可以从组合意义角度证明。</p>
+<blockquote>
+<p>有 <span class="math inline">\(x\)</span> 个不同的物品，有 <span
+class="math inline">\(k\)</span> 个位置（标号），可以重复地往这 <span
+class="math inline">\(k\)</span> 个位置放物品的方案数是 <span
+class="math inline">\(x^k\)</span>。</p>
+<p>还可以这样计数，枚举至少出现一次的物品数量 <span
+class="math inline">\(j\)</span>，选出 <span
+class="math inline">\(j\)</span> 个，乘上 <span
+class="math inline">\(\binom{x}{j}\)</span>。</p>
+<p>然后把 <span class="math inline">\(k\)</span> 个位置非空地分配给
+<span class="math inline">\(j\)</span> 种物品，乘上第二类斯特林数 <span
+class="math inline">\(\begin{Bmatrix}k\\j\end{Bmatrix}\)</span>，但斯特林数计数的是无标号集合，所以还要排列，乘上
+<span class="math inline">\(j!\)</span>。</p>
+</blockquote>
+<p>代回原式 <span class="math display">\[
+\begin{aligned}
+&amp;\sum_{x=0}^m F(x)x^k\\
+=&amp;\sum_{x=0}^mF(x)\sum_{j=0}^k\begin{Bmatrix}k\\j\end{Bmatrix}j!\binom{x}{j}\\
+=&amp;\sum_{j=0}^k\begin{Bmatrix}k\\j\end{Bmatrix}j!\color{red}{\sum_{x=0}^m
+F(x)\binom{x}{j}}
+\end{aligned}
+\]</span> 令红色部分为关于 <span class="math inline">\(j\)</span> 的函数
+<span class="math inline">\(T(j)\)</span>。</p>
+<p>考察 <span class="math inline">\(T(j)\)</span> 的组合意义。</p>
+<p>回顾 <span class="math inline">\(F(x)\)</span> 的定义：<span
+class="math inline">\(Z(c) = x\)</span> 的合法染色方案 <span
+class="math inline">\(c\)</span> 的个数。</p>
+<p>乘上 <span
+class="math inline">\(\binom{x}{j}\)</span>，也就是从关键点集合已有的颜色中选出
+<span class="math inline">\(j\)</span> 个颜色的方案数。</p>
+<p>所以 <span class="math inline">\(T(j)\)</span>
+的组合意义是：合法的染色方案数，使得 <span
+class="math inline">\(j\)</span>
+个颜色都至少在某些关键点出现了一次。</p>
+<p>我们不关心具体是哪 <span class="math inline">\(j\)</span>
+个颜色，所以先除掉一个组合数。 <span class="math display">\[
+T(j) = \binom{m}{j}A(j)
+\]</span> 现在可以把颜色分成两类：选定的 <span
+class="math inline">\(j\)</span> 个颜色，我称之为第一类颜色；和没选定的
+<span class="math inline">\(m-j\)</span>
+个颜色，我称之为第二类颜色。</p>
+<p>其中 <span class="math inline">\(A(j)\)</span>
+表示：合法染色方案数，使得每个第一类颜色都至少在某些关键点出现了一次的方案数。</p>
+<p>套路地容斥，计数合法染色方案数，使得恰好 <span
+class="math inline">\(0\)</span> 个第一类颜色未在任何关键点出现。 <span
+class="math display">\[
+A(j) = \sum_{i=0}^j(-1)^i\binom{j}{i}h(i)
+\]</span> 其中 <span class="math inline">\(h(i)\)</span>
+表示合法的染色方案数，使得 <span class="math inline">\(i\)</span>
+个第一类颜色均不在任何关键点出现的方案数。</p>
+<p>为了求出 <span class="math inline">\(h(i)\)</span>，考虑树形
+DP。设</p>
+<ul>
+<li><span class="math inline">\(f_{u,0}\)</span> 表示节点 <span
+class="math inline">\(u\)</span> 放了某个第一类颜色的方案数。</li>
+<li><span class="math inline">\(f_{u, 1}\)</span> 表示节点 <span
+class="math inline">\(u\)</span> 放了某个第二类颜色的方案数。</li>
+</ul>
+<p>注意状态的定义，我们还没有确定具体是哪个颜色（还没标号）。</p>
+<p>考虑转移，先考虑 <span class="math inline">\(u\)</span>
+放某个第二类颜色，这对 <span class="math inline">\(u\)</span>
+是否是关键点没有限制。</p>
+<p>考察 <span class="math inline">\(u\)</span> 的每个儿子 <span
+class="math inline">\(v\)</span>，如果 <span
+class="math inline">\(v\)</span>
+放第一类颜色，随便哪个都可以，乘上标号，方案数 <span
+class="math inline">\(if_{v,0}\cdot\)</span>。</p>
+<p>如果 <span class="math inline">\(v\)</span> 放第二类颜色，不能放和
+<span class="math inline">\(u\)</span>
+一样的，会少一个，乘上标号，方案数 <span
+class="math inline">\((m-1-i)f_{v, 1}\)</span>。</p>
+<p>发现每个儿子之间互不影响，所以全部乘起来 <span
+class="math display">\[
+f_{u, 1} = \prod_{v\in \text{child}(u)}\left(if_{v, 0} +
+(m-1-i)f_{v,1}\right)
+\]</span> 现在考虑 <span class="math inline">\(u\)</span>
+放第第一类颜色。如果 <span class="math inline">\(u\)</span>
+是关键点，它不能放第一类颜色，<span class="math inline">\(f_{u, 0} =
+0\)</span>。</p>
+<p>否则，类似地，考察 <span class="math inline">\(u\)</span> 的每个儿子
+<span class="math inline">\(v\)</span>。如果 <span
+class="math inline">\(v\)</span> 放第一类颜色，不能和 <span
+class="math inline">\(u\)</span> 一样，会少一种，乘上标号，方案数 <span
+class="math inline">\((i-1)f_{v,0}\)</span>。</p>
+<p>如果 <span class="math inline">\(v\)</span>
+放第二类颜色，随便哪个都可以，乘上标号，方案数 <span
+class="math inline">\((m-i)f_{v,1}\)</span>。</p>
+<p>每个儿子之间互不影响，全部乘起来 <span class="math display">\[
+f_{u,0} = \prod_{v\in\text{child}(u)}((i-1)f_{v,0}+(m-i)f_{v, 1})
+\]</span> 不妨设根为 <span class="math inline">\(1\)</span>，最终 <span
+class="math display">\[
+h(i) = if_{1,0}+(m-i)f_{1,1}
+\]</span> 全部往回代即可求出答案。</p>
+<p>答案 <span class="math display">\[
+\sum_{j=0}^k\begin{Bmatrix}k\\j\end{Bmatrix}j!\binom{m}{j}\sum_{i=0}^j(-1)^i\binom{j}{i}h(i)
+\]</span> 时间复杂度 <span class="math inline">\(\Theta(kn +
+k^2)\)</span>。</p>
 
       
     </div>
