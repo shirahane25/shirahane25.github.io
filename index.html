@@ -327,10 +327,16 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/HaHeHyt/p/17185823.
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-11-08 09:12:59 / Modified: 11:15:23" itemprop="dateCreated datePublished" datetime="2025-11-08T09:12:59+08:00">2025-11-08</time>
+              <time title="Created: 2025-11-08 09:12:59" itemprop="dateCreated datePublished" datetime="2025-11-08T09:12:59+08:00">2025-11-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-11-11 17:32:35" itemprop="dateModified" datetime="2025-11-11T17:32:35+08:00">2025-11-11</time>
+              </span>
 
           
 
@@ -345,7 +351,7 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/HaHeHyt/p/17185823.
       
           <p><strong>注意：本文章还很不完善</strong></p>
 <p><strong>注意：本文章属于个人笔记不是教程</strong></p>
-<h2 id="前置知识">前置知识</h2>
+<h2 id="前置知识">0. 前置知识</h2>
 <h3 id="二项式系数">二项式系数</h3>
 <p>组合意义：在 <span class="math inline">\(n\)</span> 个不同的物品中选
 <span class="math inline">\(m\)</span> 个的方案数。 <span
@@ -439,7 +445,7 @@ class="math inline">\(f\)</span>，但大部分问题中，求恰好是比较困
 <span class="math inline">\(f\)</span> 求出 <span
 class="math inline">\(g\)</span>。注意到 <span class="math inline">\(k =
 0\)</span> 时形式和普通容斥相同。</p>
-<h2 id="热身题">热身题</h2>
+<h2 id="热身题">1. 热身题</h2>
 <h3 id="问题一">问题一</h3>
 <blockquote>
 <p>计数长为 <span class="math inline">\(n\)</span> 的错排个数，<span
@@ -536,6 +542,69 @@ class="math inline">\(i\)</span>
 1\)</span></p>
 </blockquote>
 <p>我不会这个东西 /ll</p>
+<h2 id="实战">3. 实战</h2>
+<h3 id="cf1228e.-another-filling-the-grid"><a
+target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1228/E">CF1228E. Another
+Filling the Grid</a></h3>
+<blockquote>
+<p>给定一个 <span class="math inline">\(n\times n\)</span> 网格和整数
+<span class="math inline">\(k\)</span>。要在每个格子中填入 <span
+class="math inline">\([1, k]\)</span> 的整数，使得每行每列的最小值都为
+<span class="math inline">\(1\)</span>。求合法的填数方案数。</p>
+<p><span class="math inline">\(1\le n\le 250, 1\le k\le
+10^9\)</span>.</p>
+</blockquote>
+<p>也就是每行每列都至少出现一个 <span
+class="math inline">\(1\)</span>。也就是求恰好 <span
+class="math inline">\(0\)</span> 行 <span
+class="math inline">\(0\)</span> 列没有 <span
+class="math inline">\(1\)</span>。暴力容斥 <span class="math display">\[
+\sum_{i=0}^n\sum_{j=0}^n(-1)^{i+j}\binom{n}{i}\binom{n}{j}(k-1)^{n(i+j)-ij}k^{(n-i)(n-j)}
+\]</span> <span class="math inline">\(\Theta(n^2)\)</span>。</p>
+<h3 id="p2167-sdoi2009-bill的挑战"><a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2167">P2167 [SDOI2009]
+Bill的挑战</a></h3>
+<blockquote>
+<p>给出 <span class="math inline">\(n\)</span>
+个长度相同的字符串（由小写英文字母和 <span class="math inline">\(\tt
+?\)</span> 组成），求与这 <span class="math inline">\(n\)</span>
+个串中的恰好 <span class="math inline">\(k\)</span> 个串匹配的字符串
+<span class="math inline">\(T\)</span> 的个数，答案对 <span
+class="math inline">\(10^6 + 3\)</span> 取模。</p>
+<p>若字符串 <span class="math inline">\(S\)</span> 和 <span
+class="math inline">\(T\)</span> 匹配，满足以下条件：</p>
+<ol type="1">
+<li><span class="math inline">\(|S| = |T|\)</span>。</li>
+<li>对于任意的 <span class="math inline">\(1\le i \le |S|\)</span>，满足
+<span class="math inline">\(S_i = \tt{?}\)</span> 或 <span
+class="math inline">\(S_i = T_i\)</span>。</li>
+</ol>
+<p>其中 <span class="math inline">\(T\)</span> 只包含小写英文字母。</p>
+<p><span class="math inline">\(1\le n \le 15, 1\le |S_i| \le
+50\)</span>.</p>
+</blockquote>
+<p>设 <span class="math inline">\(f(k)\)</span> 表示恰与 <span
+class="math inline">\(k\)</span> 个模式匹配的字符串 <span
+class="math inline">\(T\)</span> 的个数。枚举子集 <span
+class="math inline">\(U\)</span>，看每一位。</p>
+<ul>
+<li>如果都是 <span class="math inline">\(\tt ?\)</span>，那么这一位有
+<span class="math inline">\(26\)</span> 种填法；</li>
+<li>如果只出现了一个字母，只有唯一的 <span
+class="math inline">\(1\)</span> 种填法；</li>
+<li>出现了多个字母，这一位没有填法。</li>
+</ul>
+<p>每一位的贡献乘起来然后累加到 <span
+class="math inline">\(f(|U|)\)</span>。然后就是套路的二项式反演了 <span
+class="math display">\[
+\sum_{i=k}^n(-1)^{i-k}\binom{i}{k}f(i)
+\]</span> <span class="math inline">\(\Theta(|S|2^n)\)</span>.</p>
+<h3 id="联考-是是非非"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2335&amp;pid=2">联考
+是是非非</a></h3>
+<blockquote>
+
+</blockquote>
 
       
     </div>
