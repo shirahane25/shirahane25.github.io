@@ -185,10 +185,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-11-11 16:41:43 / Modified: 21:14:33" itemprop="dateCreated datePublished" datetime="2025-11-11T16:41:43+08:00">2025-11-11</time>
+              <time title="Created: 2025-11-11 16:41:43" itemprop="dateCreated datePublished" datetime="2025-11-11T16:41:43+08:00">2025-11-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-11-12 09:36:26" itemprop="dateModified" datetime="2025-11-12T09:36:26+08:00">2025-11-12</time>
+              </span>
 
           
 
@@ -409,6 +415,44 @@ h(i) = if_{1,0}+(m-i)f_{1,1}
 \sum_{j=0}^k\begin{Bmatrix}k\\j\end{Bmatrix}j!\binom{m}{j}\sum_{i=0}^j(-1)^i\binom{j}{i}h(i)
 \]</span> 时间复杂度 <span class="math inline">\(\Theta(kn +
 k^2)\)</span>。</p>
+<h3 id="problem-d.-流沙-sand"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2335&amp;pid=3">Problem
+D. 流沙 sand</a></h3>
+<blockquote>
+<p>给定两个长为 <span class="math inline">\(n\)</span> 的排列 <span
+class="math inline">\(p,
+q\)</span>，可以进行若干次操作，每次操作选定两个不同的下标 <span
+class="math inline">\(i, j\)</span>，交换 <span
+class="math inline">\(p_i, p_j\)</span>，代价 <span
+class="math inline">\(\min(|i-j|,|p_i-p_j|)\)</span>。</p>
+<p>求把 <span class="math inline">\(p\)</span> 变成 <span
+class="math inline">\(q\)</span> 的最小代价。</p>
+<p><span class="math inline">\(1\le n\le 100\)</span>。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2062/G">原题</a>
+有构造部分，这道题去掉了。</p>
+<p>考虑刻画交换操作，把排列 <span class="math inline">\(p\)</span>
+看成平面直角坐标系上的点 <span class="math inline">\((i,
+p_i)\)</span>，考虑另一个点 <span class="math inline">\((j,
+p_j)\)</span>，交换操作实质上等价于：</p>
+<ul>
+<li>花费 <span
+class="math inline">\(|i-j|\)</span>，交换两点的横坐标；</li>
+<li>花费 <span class="math inline">\(|p_i - p_j|\)</span>
+交换两点的纵坐标。</li>
+</ul>
+<p>两维实质上已经独立可以分开考虑。如果再把操作看成单独一个点的移动的曼哈顿距离，最后把代价除以
+<span class="math inline">\(2\)</span> 就等价于交换。</p>
+<p>也就是现在有一些点 <span
+class="math inline">\((i,p_i)\)</span>，还有目标点 <span
+class="math inline">\((j, q_j)\)</span>，通过移动要一一匹配。不妨设
+<span class="math inline">\((i, p_i)\)</span> 匹配到 <span
+class="math inline">\((m_i,q_{m_i})\)</span>。可以发现答案下界为 <span
+class="math inline">\(M = \dfrac{1}{2}\sum|i-m_i| +
+|p_i-q_{m_i}|\)</span>。<a
+target="_blank" rel="noopener" href="https://codeforces.com/blog/entry/138866">可以证明这个下界一定可以取到</a>。</p>
+<p>问题变成了朴素的二分图完美匹配问题，最小费用最大流解决。</p>
+<p><span class="math inline">\(\mathcal{O}(n^4)\)</span>。</p>
 <h2 id="noip2025-模拟测试赛三十三"><a
 target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/contest.php?cid=2336">NOIP2025
 模拟测试赛（三十三）</a></h2>

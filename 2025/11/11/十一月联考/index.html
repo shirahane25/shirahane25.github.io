@@ -28,7 +28,7 @@
 <meta property="og:description" content="NOIP2025 模拟测试赛（三十二） Problem A. 沙滩 beach 简单构造赛时全过了没啥好说的 Problem B. 望春风 see  对于一个正整数集合 \(S\)，它的扩展 \(S&#39;\) 通过如下操作得到：  令 \(S&#39; &#x3D; S\)； 每次选取 \(S&#39;\) 中的一对数 \((x,y)\)，满足 \(2 | (x + y)\)">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-11-11T08:41:43.000Z">
-<meta property="article:modified_time" content="2025-11-11T13:14:33.709Z">
+<meta property="article:modified_time" content="2025-11-12T01:36:26.652Z">
 <meta property="article:author" content="Shirahane">
 <meta property="article:tag" content="联考">
 <meta name="twitter:card" content="summary">
@@ -188,10 +188,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-11-11 16:41:43 / Modified: 21:14:33" itemprop="dateCreated datePublished" datetime="2025-11-11T16:41:43+08:00">2025-11-11</time>
+              <time title="Created: 2025-11-11 16:41:43" itemprop="dateCreated datePublished" datetime="2025-11-11T16:41:43+08:00">2025-11-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-11-12 09:36:26" itemprop="dateModified" datetime="2025-11-12T09:36:26+08:00">2025-11-12</time>
+              </span>
 
           
             <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
@@ -419,6 +425,44 @@ h(i) = if_{1,0}+(m-i)f_{1,1}
 \sum_{j=0}^k\begin{Bmatrix}k\\j\end{Bmatrix}j!\binom{m}{j}\sum_{i=0}^j(-1)^i\binom{j}{i}h(i)
 \]</span> 时间复杂度 <span class="math inline">\(\Theta(kn +
 k^2)\)</span>。</p>
+<h3 id="problem-d.-流沙-sand"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2335&amp;pid=3">Problem
+D. 流沙 sand</a></h3>
+<blockquote>
+<p>给定两个长为 <span class="math inline">\(n\)</span> 的排列 <span
+class="math inline">\(p,
+q\)</span>，可以进行若干次操作，每次操作选定两个不同的下标 <span
+class="math inline">\(i, j\)</span>，交换 <span
+class="math inline">\(p_i, p_j\)</span>，代价 <span
+class="math inline">\(\min(|i-j|,|p_i-p_j|)\)</span>。</p>
+<p>求把 <span class="math inline">\(p\)</span> 变成 <span
+class="math inline">\(q\)</span> 的最小代价。</p>
+<p><span class="math inline">\(1\le n\le 100\)</span>。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2062/G">原题</a>
+有构造部分，这道题去掉了。</p>
+<p>考虑刻画交换操作，把排列 <span class="math inline">\(p\)</span>
+看成平面直角坐标系上的点 <span class="math inline">\((i,
+p_i)\)</span>，考虑另一个点 <span class="math inline">\((j,
+p_j)\)</span>，交换操作实质上等价于：</p>
+<ul>
+<li>花费 <span
+class="math inline">\(|i-j|\)</span>，交换两点的横坐标；</li>
+<li>花费 <span class="math inline">\(|p_i - p_j|\)</span>
+交换两点的纵坐标。</li>
+</ul>
+<p>两维实质上已经独立可以分开考虑。如果再把操作看成单独一个点的移动的曼哈顿距离，最后把代价除以
+<span class="math inline">\(2\)</span> 就等价于交换。</p>
+<p>也就是现在有一些点 <span
+class="math inline">\((i,p_i)\)</span>，还有目标点 <span
+class="math inline">\((j, q_j)\)</span>，通过移动要一一匹配。不妨设
+<span class="math inline">\((i, p_i)\)</span> 匹配到 <span
+class="math inline">\((m_i,q_{m_i})\)</span>。可以发现答案下界为 <span
+class="math inline">\(M = \dfrac{1}{2}\sum|i-m_i| +
+|p_i-q_{m_i}|\)</span>。<a
+target="_blank" rel="noopener" href="https://codeforces.com/blog/entry/138866">可以证明这个下界一定可以取到</a>。</p>
+<p>问题变成了朴素的二分图完美匹配问题，最小费用最大流解决。</p>
+<p><span class="math inline">\(\mathcal{O}(n^4)\)</span>。</p>
 <h2 id="noip2025-模拟测试赛三十三"><a
 target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/contest.php?cid=2336">NOIP2025
 模拟测试赛（三十三）</a></h2>
@@ -652,7 +696,8 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/HaHeHyt/p/17185823.
 模拟测试赛（三十二）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-a.-%E6%B2%99%E6%BB%A9-beach"><span class="nav-number">1.1.</span> <span class="nav-text">Problem
 A. 沙滩 beach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-b.-%E6%9C%9B%E6%98%A5%E9%A3%8E-see"><span class="nav-number">1.2.</span> <span class="nav-text">Problem
 B. 望春风 see</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-c.-%E6%98%AF%E6%98%AF%E9%9D%9E%E9%9D%9E-yes"><span class="nav-number">1.3.</span> <span class="nav-text">Problem
-C. 是是非非 yes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#noip2025-%E6%A8%A1%E6%8B%9F%E6%B5%8B%E8%AF%95%E8%B5%9B%E4%B8%89%E5%8D%81%E4%B8%89"><span class="nav-number">2.</span> <span class="nav-text">NOIP2025
+C. 是是非非 yes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-d.-%E6%B5%81%E6%B2%99-sand"><span class="nav-number">1.4.</span> <span class="nav-text">Problem
+D. 流沙 sand</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#noip2025-%E6%A8%A1%E6%8B%9F%E6%B5%8B%E8%AF%95%E8%B5%9B%E4%B8%89%E5%8D%81%E4%B8%89"><span class="nav-number">2.</span> <span class="nav-text">NOIP2025
 模拟测试赛（三十三）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-a.-%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86-coprime"><span class="nav-number">2.1.</span> <span class="nav-text">Problem
 A. 前缀和与差分 coprime</span></a></li></ol></li></ol></div>
       </div>
