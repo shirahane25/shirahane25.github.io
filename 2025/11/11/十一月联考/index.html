@@ -28,7 +28,7 @@
 <meta property="og:description" content="三十二 A. 沙滩 beach 简单构造赛时全过了没啥好说的 B. 望春风 see  对于一个正整数集合 \(S\)，它的扩展 \(S&#39;\) 通过如下操作得到：  令 \(S&#39; &#x3D; S\)； 每次选取 \(S&#39;\) 中的一对数 \((x,y)\)，满足 \(2 | (x + y)\) 且 \(\dfrac{x+y}{2}\not\in S&#39;\">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-11-11T08:41:43.000Z">
-<meta property="article:modified_time" content="2025-11-13T09:00:05.968Z">
+<meta property="article:modified_time" content="2025-11-13T12:23:36.995Z">
 <meta property="article:author" content="Shirahane">
 <meta property="article:tag" content="联考">
 <meta name="twitter:card" content="summary">
@@ -196,7 +196,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-11-13 17:00:05" itemprop="dateModified" datetime="2025-11-13T17:00:05+08:00">2025-11-13</time>
+                <time title="Modified: 2025-11-13 20:23:36" itemprop="dateModified" datetime="2025-11-13T20:23:36+08:00">2025-11-13</time>
               </span>
 
           
@@ -678,6 +678,68 @@ class="math inline">\(f_j \le m\)</span>
 \le \left\lfloor \dfrac{m}{i}\right\rfloor\)</span>。</p>
 <p>把下界压下来就是调和级数了。<span class="math inline">\(\Theta(n\ln
 m)\)</span>。</p>
+<h3 id="b.-古代猪文-code"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2339&amp;pid=1">B.
+古代猪文 code</a></h3>
+<blockquote>
+<p>交互库有底数 <span class="math inline">\(p\)</span> 和模数 <span
+class="math inline">\(m\)</span>，你并不知道。</p>
+<p>每次询问给出一个长度至多为 <span class="math inline">\(50\)</span>
+的，仅包含小写拉丁字母的字符串 <span
+class="math inline">\(s\)</span>，交互库会返回 <span
+class="math inline">\(f(s)\)</span>，其中定义 <span
+class="math display">\[
+f(s) = \sum_{i=1}^n \operatorname{ord}(s_i)\times p^{i-1} \bmod m
+\]</span> 其中 <span
+class="math inline">\(\operatorname{ord}(c)\)</span> 表示 <span
+class="math inline">\(c\)</span> 是第几个字符。</p>
+<p>在至多 <span class="math inline">\(3\)</span> 次询问内猜出 <span
+class="math inline">\(p\)</span> 和 <span
+class="math inline">\(m\)</span>.</p>
+<p><span class="math inline">\(26 &lt; p\le 50, p+1&lt;m\le 2\cdot
+10^9\)</span>.</p>
+</blockquote>
+<p>发现 <span class="math inline">\(p + 1 &lt; m\)</span>，也就是 <span
+class="math inline">\(f(\texttt{aa}) = p + 1 &lt;
+m\)</span>，所以可以直接得到 <span class="math inline">\(p =
+f(\texttt{aa}) - 1\)</span>。</p>
+<p>我们构造一个字符串 <span class="math inline">\(s\)</span> 使得 <span
+class="math inline">\(f(s) &gt; m\)</span>，记 <span
+class="math inline">\(f(s) = A\)</span>，询问得到 <span
+class="math inline">\(f(s)\bmod m = a\)</span>。</p>
+<p>因为知道 <span class="math inline">\(p\)</span>，所以可以直接算出
+<span class="math inline">\(f(s)\)</span>。</p>
+<p>现在我们只知道 <span class="math inline">\(m | (A - a)\)</span>。</p>
+<p>现在只剩一次询问，如果还是得到约数关系，是无法确定唯一 <span
+class="math inline">\(m\)</span> 的。</p>
+<p>然后是很人类智慧的地方：考虑和 <span class="math inline">\(A -
+a\)</span> 相邻的 <span class="math inline">\(m\)</span>
+的倍数，那么作减法可以得到 <span class="math inline">\(m\)</span>。</p>
+<p>不妨设我们询问一个 <span class="math inline">\(t\)</span>，记 <span
+class="math inline">\(f(t) = B\)</span>，询问得到 <span
+class="math inline">\(f(t)\bmod m = b\)</span>，且 <span
+class="math inline">\(B-b\)</span> 是小于 <span
+class="math inline">\(A-a\)</span> 的相邻的 <span
+class="math inline">\(m\)</span> 的倍数。</p>
+<p>首先要满足： <span class="math display">\[
+A-a-m \le B &lt; A-a
+\]</span> 又有 <span class="math display">\[
+a &lt; m \Leftrightarrow a \le m-1
+\]</span> 所以 <span class="math display">\[
+A-a-m\le A-2a-1
+\]</span> 所以只需要询问 <span class="math inline">\([A-2a-1,
+A-a-1]\)</span> 中的任意一个符合条件的 <span
+class="math inline">\(B\)</span> 即可。一定存在这样的 <span
+class="math inline">\(B\)</span>。</p>
+<p>符合条件意味着 <span class="math inline">\(B\)</span> 拆成 <span
+class="math inline">\(p\)</span> 进制数后，每一位都是 <span
+class="math inline">\([1, 26]\)</span>
+的整数，但是区间长度太长，不能遍历。</p>
+<p>由于 <span class="math inline">\(p\)</span>
+很小，我们认为满足条件的数其实分布得又多又均匀，所以直接随机选取区间中的
+<span class="math inline">\(B\)</span>
+直至符合要求即可通过。期望次数不知道，但 GPT 说是 <span
+class="math inline">\(26\)</span> 次。</p>
 
     </div>
 
@@ -764,7 +826,8 @@ m)\)</span>。</p>
 是是非非 yes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d.-%E6%B5%81%E6%B2%99-sand"><span class="nav-number">1.4.</span> <span class="nav-text">D.
 流沙 sand</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%8D%81%E4%B8%89"><span class="nav-number">2.</span> <span class="nav-text">三十三</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a.-%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86-coprime"><span class="nav-number">2.1.</span> <span class="nav-text">A.
 前缀和与差分 coprime</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%8D%81%E5%9B%9B"><span class="nav-number">3.</span> <span class="nav-text">三十四</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a.-%E5%B0%8F%E5%90%83%E8%A1%97-food"><span class="nav-number">3.1.</span> <span class="nav-text">A.
-小吃街 food</span></a></li></ol></li></ol></div>
+小吃街 food</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b.-%E5%8F%A4%E4%BB%A3%E7%8C%AA%E6%96%87-code"><span class="nav-number">3.2.</span> <span class="nav-text">B.
+古代猪文 code</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

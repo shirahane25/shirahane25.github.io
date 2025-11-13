@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-11-13 17:00:05" itemprop="dateModified" datetime="2025-11-13T17:00:05+08:00">2025-11-13</time>
+                <time title="Modified: 2025-11-13 20:23:36" itemprop="dateModified" datetime="2025-11-13T20:23:36+08:00">2025-11-13</time>
               </span>
 
           
@@ -668,6 +668,68 @@ class="math inline">\(f_j \le m\)</span>
 \le \left\lfloor \dfrac{m}{i}\right\rfloor\)</span>。</p>
 <p>把下界压下来就是调和级数了。<span class="math inline">\(\Theta(n\ln
 m)\)</span>。</p>
+<h3 id="b.-古代猪文-code"><a
+target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2339&amp;pid=1">B.
+古代猪文 code</a></h3>
+<blockquote>
+<p>交互库有底数 <span class="math inline">\(p\)</span> 和模数 <span
+class="math inline">\(m\)</span>，你并不知道。</p>
+<p>每次询问给出一个长度至多为 <span class="math inline">\(50\)</span>
+的，仅包含小写拉丁字母的字符串 <span
+class="math inline">\(s\)</span>，交互库会返回 <span
+class="math inline">\(f(s)\)</span>，其中定义 <span
+class="math display">\[
+f(s) = \sum_{i=1}^n \operatorname{ord}(s_i)\times p^{i-1} \bmod m
+\]</span> 其中 <span
+class="math inline">\(\operatorname{ord}(c)\)</span> 表示 <span
+class="math inline">\(c\)</span> 是第几个字符。</p>
+<p>在至多 <span class="math inline">\(3\)</span> 次询问内猜出 <span
+class="math inline">\(p\)</span> 和 <span
+class="math inline">\(m\)</span>.</p>
+<p><span class="math inline">\(26 &lt; p\le 50, p+1&lt;m\le 2\cdot
+10^9\)</span>.</p>
+</blockquote>
+<p>发现 <span class="math inline">\(p + 1 &lt; m\)</span>，也就是 <span
+class="math inline">\(f(\texttt{aa}) = p + 1 &lt;
+m\)</span>，所以可以直接得到 <span class="math inline">\(p =
+f(\texttt{aa}) - 1\)</span>。</p>
+<p>我们构造一个字符串 <span class="math inline">\(s\)</span> 使得 <span
+class="math inline">\(f(s) &gt; m\)</span>，记 <span
+class="math inline">\(f(s) = A\)</span>，询问得到 <span
+class="math inline">\(f(s)\bmod m = a\)</span>。</p>
+<p>因为知道 <span class="math inline">\(p\)</span>，所以可以直接算出
+<span class="math inline">\(f(s)\)</span>。</p>
+<p>现在我们只知道 <span class="math inline">\(m | (A - a)\)</span>。</p>
+<p>现在只剩一次询问，如果还是得到约数关系，是无法确定唯一 <span
+class="math inline">\(m\)</span> 的。</p>
+<p>然后是很人类智慧的地方：考虑和 <span class="math inline">\(A -
+a\)</span> 相邻的 <span class="math inline">\(m\)</span>
+的倍数，那么作减法可以得到 <span class="math inline">\(m\)</span>。</p>
+<p>不妨设我们询问一个 <span class="math inline">\(t\)</span>，记 <span
+class="math inline">\(f(t) = B\)</span>，询问得到 <span
+class="math inline">\(f(t)\bmod m = b\)</span>，且 <span
+class="math inline">\(B-b\)</span> 是小于 <span
+class="math inline">\(A-a\)</span> 的相邻的 <span
+class="math inline">\(m\)</span> 的倍数。</p>
+<p>首先要满足： <span class="math display">\[
+A-a-m \le B &lt; A-a
+\]</span> 又有 <span class="math display">\[
+a &lt; m \Leftrightarrow a \le m-1
+\]</span> 所以 <span class="math display">\[
+A-a-m\le A-2a-1
+\]</span> 所以只需要询问 <span class="math inline">\([A-2a-1,
+A-a-1]\)</span> 中的任意一个符合条件的 <span
+class="math inline">\(B\)</span> 即可。一定存在这样的 <span
+class="math inline">\(B\)</span>。</p>
+<p>符合条件意味着 <span class="math inline">\(B\)</span> 拆成 <span
+class="math inline">\(p\)</span> 进制数后，每一位都是 <span
+class="math inline">\([1, 26]\)</span>
+的整数，但是区间长度太长，不能遍历。</p>
+<p>由于 <span class="math inline">\(p\)</span>
+很小，我们认为满足条件的数其实分布得又多又均匀，所以直接随机选取区间中的
+<span class="math inline">\(B\)</span>
+直至符合要求即可通过。期望次数不知道，但 GPT 说是 <span
+class="math inline">\(26\)</span> 次。</p>
 
       
     </div>
@@ -718,7 +780,7 @@ m)\)</span>。</p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-11-11 19:30:31" itemprop="dateModified" datetime="2025-11-11T19:30:31+08:00">2025-11-11</time>
+                <time title="Modified: 2025-11-13 21:23:41" itemprop="dateModified" datetime="2025-11-13T21:23:41+08:00">2025-11-13</time>
               </span>
 
           
@@ -744,6 +806,11 @@ class="math display">\[
 \binom{n}{m} = \binom{n-1}{m} + \binom{n-1}{m-1}
 \end{gather*}
 \]</span></p>
+<h3 id="二项式定理">二项式定理</h3>
+<p><span class="math display">\[
+(a+b)^n = \sum_{i=0}^n\binom{n}{i}a^ib^{n-i}
+\]</span></p>
+<h3 id="section"></h3>
 <h3 id="多重集的排列数-多重组合数">多重集的排列数 / 多重组合数</h3>
 <p><span class="math inline">\(n\)</span> 个物品，<span
 class="math inline">\(m\)</span> 种颜色，每种颜色的物品视作相同，第
@@ -754,7 +821,17 @@ a_i = n\)</span>），求排列方案数 <span class="math display">\[
 \]</span> 发现 <span class="math inline">\(\binom{n}{m} = \binom{n}{m, n
 - m}\)</span>，但没什么用。</p>
 <h3 id="二项式推论-组合恒等式">二项式推论 / 组合恒等式</h3>
-<p>待补</p>
+<h4 id="等式一">等式一</h4>
+<p><span class="math display">\[
+\begin{gather*}
+\sum_{i=0}^n\binom{n}{i} = 2^n \tag{1}
+\end{gather*}
+\]</span></p>
+<p>二项式定理 <span class="math inline">\((1+1)^n\)</span>。</p>
+<h4 id="等式二">等式二</h4>
+<p><span class="math display">\[
+\sum_{i=0}^ni\binom{n}{i} = n2^{n-1} \tag{2}
+\]</span></p>
 <h3 id="球盒模型">球盒模型</h3>
 <p>有 <span class="math inline">\(n\)</span> 个球，<span
 class="math inline">\(m\)</span> 个盒子。要将 <span
@@ -796,10 +873,6 @@ class="math inline">\(i\)</span>
 个盒子为空，剩下的盒子随意放，二项式反演得 <span class="math display">\[
 \sum_{i=0}^m(-1)^i\binom{m}{i}(m-i)^n
 \]</span></p>
-<h3 id="二项式定理">二项式定理</h3>
-<p><span class="math display">\[
-(a+b)^n = \sum_{i=0}^n\binom{n}{i}a^ib^{n-i}
-\]</span></p>
 <h3 id="容斥原理">容斥原理</h3>
 <p>待补</p>
 <h3 id="二项式反演">二项式反演</h3>
@@ -828,6 +901,16 @@ class="math inline">\(f\)</span>，但大部分问题中，求恰好是比较困
 <span class="math inline">\(f\)</span> 求出 <span
 class="math inline">\(g\)</span>。注意到 <span class="math inline">\(k =
 0\)</span> 时形式和普通容斥相同。</p>
+<h3 id="莫比乌斯反演">莫比乌斯反演</h3>
+<p>是在因数倍数关系上的容斥。尽管更多应用在数论问题中，但也可以用来解决计数问题。</p>
+<p>记 <span class="math inline">\(f,g\)</span> 是两个数论函数。</p>
+<p>形式一 <span class="math display">\[
+g(n) = \sum_{d|n}f(d) \Leftrightarrow f(n) =
+\sum_{d|n}\mu\left(\dfrac{n}{d}\right)g(d)
+\]</span> 形式二 <span class="math display">\[
+g(n) = \sum_{n|d}f(d)\Leftrightarrow f(n) =
+\sum_{n|d}\mu\left(\dfrac{d}{n}\right)g(d)
+\]</span></p>
 <h2 id="热身题">热身题</h2>
 <h3 id="问题一">问题一</h3>
 <blockquote>
@@ -839,7 +922,7 @@ class="math inline">\(p_i = i\)</span> 的排列数，钦定 <span
 class="math inline">\(i\)</span>
 个这样的位置，剩下的没有限制可以随意排列，二项式反演可得 <span
 class="math display">\[
-\sum_{i=0}^n(-1)^i\binom{n}{i}(n-i)!
+\boxed{\sum_{i=0}^n(-1)^i\binom{n}{i}(n-i)!}
 \]</span></p>
 <h3 id="问题二">问题二</h3>
 <blockquote>
@@ -857,12 +940,12 @@ class="math inline">\(m\)</span>
 class="math inline">\(0\)</span> 个盒子为空的方案数，钦定 <span
 class="math inline">\(i\)</span>
 个盒子为空，剩下的盒子随意放，二项式反演得 <span class="math display">\[
-\dfrac{1}{m!}\sum_{i=0}^m(-1)^i\binom{m}{i}(m-i)^n
+\boxed{\dfrac{1}{m!}\sum_{i=0}^m(-1)^i\binom{m}{i}(m-i)^n}
 \]</span> 当然也可以递推，考察第 <span class="math inline">\(n\)</span>
 个球的放入情况，可以新开一个盒子，也可以放入已有的 <span
 class="math inline">\(m\)</span> 个盒子中的 <span
 class="math inline">\(1\)</span> 个 <span class="math display">\[
-S(n, m) = S(n - 1, m - 1) + mS(n-1,m)
+\boxed{S(n, m) = S(n - 1, m - 1) + mS(n-1,m)}
 \]</span> 其中规定：<span class="math inline">\(S(0, 0) = 1, S(n, 0)=
 0(n &gt; 0), S(n, m) = 0(m &gt; n)\)</span></p>
 <h3 id="问题三">问题三</h3>
@@ -878,7 +961,7 @@ class="math inline">\(m(m-1)^{n-1}\)</span>。</p>
 <p>对着这个限制容斥，即求恰好 <span class="math inline">\(0\)</span>
 个颜色不出现的方案数，钦定 <span class="math inline">\(i\)</span>
 个颜色不出现，剩下的放入。 <span class="math display">\[
-\sum_{i=0}^m(-1)^i\binom{m}{i}(m-i)(m-1-i)^{n-1}
+\boxed{\sum_{i=0}^m(-1)^i\binom{m}{i}(m-i)(m-1-i)^{n-1}}
 \]</span></p>
 <h3 id="问题四">问题四</h3>
 <blockquote>
@@ -925,7 +1008,16 @@ class="math inline">\(i\)</span>
 1\)</span></p>
 </blockquote>
 <p>我不会这个东西 /ll</p>
-<h2 id="实战">实战</h2>
+<h2 id="基础计数">基础计数</h2>
+<p>基础计数，非常抽象地概括，大概就是有一个指数、阶乘级的任务，给定一些限制，求出阶乘、指数大小的全集中满足限制的子集大小。</p>
+<p>基础计数需要的工具</p>
+<ul>
+<li>组合数学知识</li>
+<li>基本推式子能力</li>
+<li>动态规划设计</li>
+<li>简单容斥、简单反演</li>
+</ul>
+<p>容斥反演本质上是用来拆形如恰好、至少的限制的，下面的题目只用到了非常基础模板的容斥和反演。</p>
 <h3 id="cf1228e.-another-filling-the-grid"><a
 target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1228/E">CF1228E. Another
 Filling the Grid</a></h3>
@@ -942,7 +1034,7 @@ class="math inline">\(1\)</span>。也就是求恰好 <span
 class="math inline">\(0\)</span> 行 <span
 class="math inline">\(0\)</span> 列没有 <span
 class="math inline">\(1\)</span>。暴力容斥 <span class="math display">\[
-\sum_{i=0}^n\sum_{j=0}^n(-1)^{i+j}\binom{n}{i}\binom{n}{j}(k-1)^{n(i+j)-ij}k^{(n-i)(n-j)}
+\boxed{\sum_{i=0}^n\sum_{j=0}^n(-1)^{i+j}\binom{n}{i}\binom{n}{j}(k-1)^{n(i+j)-ij}k^{(n-i)(n-j)}}
 \]</span> <span class="math inline">\(\Theta(n^2)\)</span>。</p>
 <h3 id="p2167-sdoi2009-bill的挑战"><a
 target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2167">P2167 [SDOI2009]
@@ -980,7 +1072,7 @@ class="math inline">\(1\)</span> 种填法；</li>
 <p>每一位的贡献乘起来然后累加到 <span
 class="math inline">\(f(|U|)\)</span>。然后就是套路的二项式反演了 <span
 class="math display">\[
-\sum_{i=k}^n(-1)^{i-k}\binom{i}{k}f(i)
+\boxed{\sum_{i=k}^n(-1)^{i-k}\binom{i}{k}f(i)}
 \]</span> <span class="math inline">\(\Theta(|S|2^n)\)</span>.</p>
 <h3 id="联考-是是非非"><a
 target="_blank" rel="noopener" href="http://192.168.102.138/JudgeOnline/problem.php?cid=2335&amp;pid=2">联考
@@ -1103,9 +1195,156 @@ class="math display">\[
 h(i) = if_{1,0}+(m-i)f_{1,1}
 \]</span> 全部往回代即可求出答案。</p>
 <p>答案 <span class="math display">\[
-\sum_{j=0}^k\begin{Bmatrix}k\\j\end{Bmatrix}j!\binom{m}{j}\sum_{i=0}^j(-1)^i\binom{j}{i}h(i)
+\boxed{\sum_{j=0}^k\begin{Bmatrix}k\\j\end{Bmatrix}j!\binom{m}{j}\sum_{i=0}^j(-1)^i\binom{j}{i}h(i)}
 \]</span> 时间复杂度 <span class="math inline">\(\Theta(kn +
 k^2)\)</span>。</p>
+<h3 id="abc242f.-black-and-white-rooks"><a
+target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc242/tasks/abc242_f">ABC242F. Black
+and White Rooks</a></h3>
+<blockquote>
+<p><span class="math inline">\(n\times m\)</span> 的棋盘上，需要放置
+<span class="math inline">\(B\)</span> 个黑车和 <span
+class="math inline">\(W\)</span> 个白车，满足：</p>
+<ul>
+<li>所有 <span class="math inline">\(B + W\)</span>
+个车都被放置在棋盘上；</li>
+<li>每个棋格最多放置一个车；</li>
+<li>不存在某对白车和黑车，使得他们互相攻击。</li>
+</ul>
+<p>注意黑车和白车均无标号。即，同色的车不互相区分。</p>
+<p><span class="math inline">\(1\le n,m\le 50, 1\le B, W \le 2500,
+B+W\le n\cdot m\)</span>。</p>
+</blockquote>
+<p>先放黑车再放白车。</p>
+<p>在一种方案中，假设黑车占据了 <span class="math inline">\(a\)</span>
+行 <span class="math inline">\(b\)</span> 列，那么这 <span
+class="math inline">\(a\)</span> 行 <span
+class="math inline">\(b\)</span>
+列都不能放白车，也就是白车只能放在剩下的 <span
+class="math inline">\((n-a)(m-b)\)</span> 个格子中，没有限制，方案数是
+<span class="math inline">\(\binom{(n-a)(m-b)}{W}\)</span>。</p>
+<p>枚举 <span class="math inline">\(a, b\)</span>，不关心具体是哪 <span
+class="math inline">\(a\)</span> 行 <span
+class="math inline">\(b\)</span> 列，乘上组合数 <span
+class="math inline">\(\binom{n}{a}\binom{m}{b}\)</span>，</p>
+<p>现在只需计数，一个 <span class="math inline">\(a\times b\)</span>
+棋盘，黑车恰好占据 <span class="math inline">\(a\)</span> 行 <span
+class="math inline">\(b\)</span> 列的方案数，也就是恰好 <span
+class="math inline">\(0\)</span> 行 <span
+class="math inline">\(0\)</span> 列没有放车的方案数。 <span
+class="math display">\[
+\sum_{i=0}^a\sum_{j=0}^b(-1)^{i+j}\binom{a}{i}\binom{b}{j}\binom{(a-i)(b-j)}{B}
+\]</span> 所以答案是 <span class="math display">\[
+\boxed{\sum_{a=1}^n\sum_{b=1}^m\binom{n}{a}\binom{m}{b}\binom{(n-a)(m-b)}{W}\sum_{i=0}^a\sum_{j=0}^b(-1)^{i+j}\binom{a}{i}\binom{b}{j}\binom{(a-i)(b-j)}{B}}
+\]</span> <span class="math inline">\(\Theta(n^2m^2)\)</span>.</p>
+<h3 id="cf712d.-memory-and-scores"><a
+target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/712/D">CF712D. Memory
+and Scores</a></h3>
+<blockquote>
+<p>Alice 和 Bob 玩游戏。</p>
+<p>初始时 Alice 有 <span class="math inline">\(a\)</span> 分，Bob 有
+<span class="math inline">\(b\)</span> 分。</p>
+<p>游戏进行 <span class="math inline">\(t\)</span>
+轮，每轮两人独立操作，一人等概率随机选择一个 <span
+class="math inline">\([-k, k]\)</span> 的整数 <span
+class="math inline">\(x\)</span> 加到他的分数上。</p>
+<p>求有多少种操作方案，使得最终 Alice 的得分严格大于 Bob 的得分。</p>
+<p><span class="math inline">\(1\le a,b\le 100,1\le k\le 1000,1\le t\le
+100\)</span>.</p>
+</blockquote>
+<p>这种按轮次进行的，每轮决策性明显的东西，考虑动态规划。</p>
+<p>发现两人的操作是完全独立且本质相同的，设计一个动态规划，求出初试分数为
+<span class="math inline">\(s\)</span>，最终分数为 <span
+class="math inline">\(S\)</span> 的方案数。</p>
+<p>设 <span class="math inline">\(f_{i,j}\)</span> 表示进行到第 <span
+class="math inline">\(i\)</span> 轮，得分为 <span
+class="math inline">\(j\)</span> 的方案数。初始时 <span
+class="math inline">\(f_{0,s} = 1\)</span>。</p>
+<p>转移是朴素的 <span class="math display">\[
+f_{i,j} = \sum_{x=j-k}^{j + k} f_{i-1,x}
+\]</span> 前缀和优化即可做到 <span
+class="math inline">\(\Theta(t^2k)\)</span>。</p>
+<p>统计答案就是对 Bob 的 DP 数组 <span class="math inline">\(g\)</span>
+求个前缀和，然后枚举 Alice 的最终分数。</p>
+<p>没有用到组合数学，不知道怎么出现在题单的，也许是有容斥做法。</p>
+<h3 id="cf340e.-iahub-and-permutations"><a
+target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/340/E">CF340E. Iahub and
+Permutations</a></h3>
+<blockquote>
+<p>有一长为 <span class="math inline">\(n\)</span> 的排列 <span
+class="math inline">\(p\)</span>，但是有一些值未确定，表示为 <span
+class="math inline">\(-1\)</span>。</p>
+<p>现在要把排列还原。求出还原后的排列是错排的方案数。</p>
+<p>对于排列固定的值都有 <span class="math inline">\(p_i\neq
+i\)</span>。</p>
+<p><span class="math inline">\(1\le n\le 2000\)</span>.</p>
+</blockquote>
+<p>恰好 <span class="math inline">\(0\)</span> 个位置满足 <span
+class="math inline">\(p_i = i\)</span>。</p>
+<p>记排列中已有的数集为 <span class="math inline">\(S\)</span>。</p>
+<p>记 <span class="math display">\[
+\begin{gather*}
+m = \#\{t:p_t = -1\}\\
+m&#39;=\#\{t: p_t = -1 \wedge t \not\in S\}
+\end{gather*}
+\]</span> 那么答案等于 <span class="math display">\[
+\boxed{\sum_{i=0}^n(-1)^i\binom{m&#39;}{i}(m-i)!}
+\]</span> 也就是有一些位置是肯定错排的。这是和热身问题一唯一的区别。</p>
+<h3 id="cf839d.-winter-is-here"><a
+target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/839/D">CF839D. Winter is
+here</a></h3>
+<blockquote>
+<p>给定长为 <span class="math inline">\(n\)</span> 的正整数数组 <span
+class="math inline">\(a\)</span>。</p>
+<p>记 <span class="math inline">\(a&#39;\)</span> 是 <span
+class="math inline">\(a\)</span> 的一个子序列，求 <span
+class="math display">\[
+\sum_{a&#39;, \gcd(a&#39;) &gt; 1} |a&#39;|\gcd(a&#39;)
+\]</span> <span class="math inline">\(1\le n\le 2\cdot10^5, 1\le a_i\le
+10^6\)</span>.</p>
+</blockquote>
+<p>记 <span class="math inline">\(m = 10^6\)</span>。</p>
+<p>直观的想法是枚举 <span class="math inline">\(\gcd =
+d\)</span>，枚举子序列长度 <span
+class="math inline">\(i\)</span>，转化成计数有多少个长为 <span
+class="math inline">\(i\)</span> 的子序列，使得 <span
+class="math inline">\(\gcd\)</span> 恰好为 <span
+class="math inline">\(d\)</span>。记这个为 <span
+class="math inline">\(f(d, i)\)</span>。记 <span
+class="math inline">\(a\)</span> 中 <span
+class="math inline">\(d\)</span> 的倍数个数为 <span
+class="math inline">\(A(d)\)</span>。</p>
+<p>答案为 <span class="math display">\[
+\sum_{d=2}^md\sum_{i=1}^nif(d, i)
+\]</span> 使得 <span class="math inline">\(\gcd = d\)</span>
+的子序列内的数一定都是 <span class="math inline">\(d\)</span>
+的倍数，但这不是必要的。</p>
+<p>符合直觉的想法是，直接从这 <span class="math inline">\(A(d)\)</span>
+个倍数中选 <span class="math inline">\(i\)</span> 个出来，但 <span
+class="math inline">\(\gcd\)</span> 可能会变成 <span
+class="math inline">\(d\)</span> 的倍数。</p>
+<p>如果设 <span class="math inline">\(g(d, i)\)</span> 表示长为 <span
+class="math inline">\(i\)</span> 的子序列数量，使得每个数都被 <span
+class="math inline">\(d\)</span> 整除。有 <span class="math display">\[
+\begin{aligned}
+g(d, i) = \sum_{d|t} f(t, i) \Leftrightarrow f(d, i) &amp;=
+\sum_{d|t}\mu\left(\dfrac{t}
+{d}\right)g(t, i) \\ &amp;=
+\sum_{d|t}\mu\left(\dfrac{t}{d}\right)\binom{A(t)}{i}
+\end{aligned}
+\]</span> 直接代回求和是 <span class="math inline">\(\Theta(mn\ln
+m)\)</span> 的，这时候就需要推式子 <span class="math display">\[
+\begin{aligned}
+&amp;\sum_{d=2}^m
+d\sum_{i=1}^{A(d)}i\sum_{d|t}\mu\left(\dfrac{t}{d}\right)\binom{A(t)}{i}\\
+=&amp;\sum_{d=2}^md\sum_{d|t}\mu\left(\dfrac{t}{d}\right)\sum_{i=1}^{A(t)}i\binom{A(t)}{i}\\
+=&amp;\boxed{\sum_{d=2}^md\sum_{d|t}\mu\left(\dfrac{t}{d}\right)A(t)2^{A(t)-1}}
+\end{aligned}
+\]</span> 这里用了组合恒等式二。</p>
+<p><span class="math inline">\(\mu\)</span> 可 <span
+class="math inline">\(\Theta(m)\)</span> 筛出，<span
+class="math inline">\(A\)</span> 和答案的计算都是调和级数 <span
+class="math inline">\(\Theta(m\ln m)\)</span>。</p>
 
       
     </div>
